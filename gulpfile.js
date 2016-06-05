@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const gulpWebpack = require('webpack-stream');
+const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const sass = require('gulp-sass');
 const maps = require('gulp-sourcemaps');
@@ -32,7 +32,7 @@ gulp.task('startservers:test', () => {
 
 gulp.task('webpack:dev', ['html:dev', 'css:dev'], () => {
   return gulp.src('app/js/entry.js')
-    .pipe(gulpWebpack({
+    .pipe(webpackStream({
       devtool: 'source-map',
       output: {
         filename: 'bundle.js'
@@ -65,7 +65,7 @@ gulp.task('css:dev', ['sass:dev'], () => {
 
 gulp.task('webpack:test', () => {
   return gulp.src('test/unit/test_entry.js')
-  .pipe(gulpWebpack({
+  .pipe(webpackStream({
     devtool: 'source-map',
     output: {
       filename: 'bundle.js'
