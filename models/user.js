@@ -6,7 +6,22 @@ const jwt = require('jsonwebtoken');
 var userSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  findHash: { type: String, unique: true }
+  findHash: { type: String, unique: true },
+  encodedId: { type: String, unique: true, required: true },
+  fitbitToken: { type: String },
+  fitbitRefreshToken: { type: String },
+  zipCode: { type: String, required: true },
+  cliques: [String],
+  memberSince: { type: Date },
+  todaySteps: { type: Number },
+  weekSteps: { type: Number },
+  weekAvgSteps: { type: Number },
+  lifetimeSteps: { type: Number },
+  lifetimeAvgSteps: { type: Number },
+  best: {
+    date: { type: Date },
+    steps: { type: Number }
+  }
 });
 
 userSchema.methods.generateHash = function(password) {
