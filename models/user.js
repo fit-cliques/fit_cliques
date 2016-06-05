@@ -8,21 +8,28 @@ var userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   findHash: { type: String, unique: true },
   encodedId: { type: String, unique: true, required: true },
-  fitbitToken: { type: String },
-  fitbitRefreshToken: { type: String },
+  fitbitToken: String,
+  fitbitRefreshToken: String,
   zipCode: { type: String, required: true },
   cliques: [String],
-  memberSince: { type: Date },
-  strideLength: { Number },
-  todaySteps: { type: Number },
-  weekSteps: { type: Number },
-  weekAvgSteps: { type: Number },
-  lifetimeSteps: { type: Number },
-  lifetimeAvgSteps: { type: Number },
+  memberSince: Date,
+  strideLength: Number,
+  todaySteps: Number,
+  todayDistance: Number,
+  weekSteps: Number,
+  weekAvgSteps: Number,
+  weekDistance: Number,
+  lifetimeSteps: Number,
+  lifetimeAvgSteps: Number,
+  lifetimeDistance: Number,
   lastSeven: [],
-  best: {
-    date: { type: Date },
-    steps: { type: Number }
+  bestSteps: {
+    date: Date,
+    steps: Number
+  },
+  bestDistance: {
+    date: Date,
+    distance: Number
   }
 });
 
