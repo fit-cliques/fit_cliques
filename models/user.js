@@ -18,6 +18,7 @@ var userSchema = new mongoose.Schema({
   weekAvgSteps: { type: Number },
   lifetimeSteps: { type: Number },
   lifetimeAvgSteps: { type: Number },
+  lastSeven: [],
   best: {
     date: { type: Date },
     steps: { type: Number }
