@@ -82,7 +82,7 @@ gulp.task('webpack:test', () => {
   .pipe(gulp.dest('/test'));
 });
 
-gulp.test('test:mocha', () => {
+gulp.task('test:mocha', () => {
   return gulp.src(testFiles)
     .pipe(mocha());
 });
