@@ -11,7 +11,6 @@ var userSchema = new mongoose.Schema({
   fitbitToken: { type: String },
   fitbitRefreshToken: { type: String },
   zipCode: { type: String, required: true },
-  zipCodeRank: { Number },
   cliques: [String],
   memberSince: { type: Date },
   strideLength: { Number },
