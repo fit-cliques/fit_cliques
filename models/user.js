@@ -41,4 +41,11 @@ userSchema.methods.generateFindHash = function(cb) {
   _generateFindHash();
 };
 
+userSchema.methods.generateToken = function(cb) {
+  this.generateFindHash(function(err, hash) {  // eslint-disable-line prefer-arrow-callback
+    if (err) return cb(err);
+    cb(null, jwt.sign({ idd: hash }, process.env.APP_SECRET));
+  });
+};
+
 module.exports = exports = mongoose.model('User', userSchema);
