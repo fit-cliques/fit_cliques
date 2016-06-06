@@ -3,14 +3,6 @@ const config = require('../config');
 module.exports = function(app) {
   app.factory('fbUserAuth', ['$http', '$q', function($http, $q) {
     return {
-      fbToken: '',
-      fbRefreshToken: '',
-      fbUserId: '',
-      todaySteps: '',
-      todayDistance: '',
-      memberSince: '',
-      encodedId: '',
-      strideLength: '',
       getFbTokens: function(urlCode) {
         this.urlCode = urlCode;
         $http({
