@@ -6,13 +6,13 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 5555;
 
-// const userRouter = require(__dirname + '/routes/user_router');
-// const authRouter = require(__dirname + '/routes/auth_router');
+const userRouter = require(__dirname + '/routes/user_router');
+const authRouter = require(__dirname + '/routes/auth_router');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fit_cliques_DB');
 
-// app.use('/api', userRouter);
-// app.use('/api', authRouter);
+app.use('/api', userRouter);
+app.use('/api', authRouter);
 
 app.get('/signup', (req, res) => {
   res.redirect('/#' + req.url);
