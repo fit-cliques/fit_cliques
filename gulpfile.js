@@ -59,7 +59,7 @@ gulp.task('sass:dev', () => {
 });
 
 gulp.task('css:dev', ['sass:dev'], () => {
-  return gulp.src('app/**/*.css')
+  return gulp.src('app/styles/main.css')
     .pipe(gulp.dest('/build'));
 });
 
