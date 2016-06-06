@@ -3,6 +3,7 @@ const Router = require('express').Router;
 const User = require(__dirname + '/../models/user');
 const bodyParser = require('body-parser').json();
 const jwToken = require(__dirname + '/../lib/jwt_auth');
+const handleErr = require(__dirname + '/../lib/handle_err');
 
 let userRouter = module.exports = Router();
 
@@ -11,35 +12,34 @@ userRouter.route('/user')
 .post(jwToken, bodyParser, (req, res) => {
   let newUser = new User(req.body);
   newUser.save((err, data) => {
-    if (err) {
-      res.send(err);
-    }
+    if (err) return handleErr(err, res);
     res.status(200).json(data);
   });
 })
 
 .get(jwToken, (req, res) => {
   User.find((err, userdata) => {
-    if (err) {
-      res.send(err);
-    }
-    res.send(200).json(userdata);
+    if (err) return handleErr(err, res);
+    res.status(200).json(userdata);
   });
 });
 
 userRouter.route('/user/:user_id')
 
-.put(jwToken, (req, res) => {
+.get(jwToken, (req, res) => {
+  User.findById(req.params.user_id, (err, userdata) => {
+    if (err) return handleErr(err, res);
+    res.status(200).json(userdata);
+  });
+})
+
+.put(jwToken, bodyParser, (req, res) => {
   User.findByIdAndUpdate(req.params.user_id, req.body, (err, userdata) => {
-    if (err) {
-      res.send(err);
-    }
+    if (err) return handleErr(err, res);
     userdata.save((err) => {
-      if (err) {
-        res.send(err);
-      }
+      if (err) return handleErr(err, res);
     });
-    res.status(200).json({ message: 'Successfully updated!' });
+    res.status(200).json({ msg: 'Successfully updated!' });
   });
 })
 
@@ -47,9 +47,7 @@ userRouter.route('/user/:user_id')
   User.remove({
     _id: req.params.user_id
   }, (err) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json({ message: 'Successfully deleted!' });
+    if (err) return handleErr(err, res);
+    res.json({ msg: 'Successfully deleted!' });
   });
 });
