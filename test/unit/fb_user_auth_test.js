@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const angular = require('angular');
 require('angular-mocks');
 const config = require('../../app/js/config');
@@ -78,5 +79,18 @@ describe('fb user auth service', function() {
     expect(fbUserAuth.bestSteps.value).toBe(1);
     expect(fbUserAuth.bestDistance.date).toBe('2016-02-01');
     expect(fbUserAuth.bestDistance.value).toBe(8);
+  }));
+
+  it('should update the user token', angular.mock.inject(function(fbUserAuth) {
+    $httpBackend.expectPOST(config.fbAuthUrl).respond(200, {
+      access_token: '67890',
+      refresh_token: '123',
+      user_id: 'testFbUser'
+    });
+    fbUserAuth.updateFbUserToken();
+    $httpBackend.flush();
+    expect(fbUserAuth.fbToken).toBe('67890');
+    expect(fbUserAuth.fbRefreshToken).toBe('123');
+    expect(fbUserAuth.fbUserId).toBe('testFbUser');
   }));
 });
