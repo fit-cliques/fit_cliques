@@ -77,7 +77,7 @@ describe('server', () => {
         .send({ username: 'John Cena' })
         .end((err, res) => {
           expect(err).to.eql(null);
-          expect(res.body.message).to.eql('Successfully updated!');
+          expect(res.body.msg).to.eql('Successfully updated!');
           done();
         });
     });
@@ -88,7 +88,7 @@ describe('server', () => {
         .set('token', this.token)
         .end((err, res) => {
           expect(err).to.eql(null);
-          expect(res.body.message).to.eql('Successfully deleted!');
+          expect(res.body.msg).to.eql('Successfully deleted!');
           done();
         });
     });
