@@ -1,4 +1,4 @@
-process.env.MONGDOB_URI = 'mongodb://localhost/fit_cliques_testDB';
+process.env.MONGODB_URI = 'mongodb://localhost/fit_cliques_testDB';
 const mongoose = require('mongoose');
 const port = process.env.PORT = 5050;
 const server = require(__dirname + '/../server');
