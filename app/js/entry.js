@@ -1,6 +1,28 @@
 const angular = require('angular');
-require('angular-route');
+const fitCliqueApp = angular.module('fitCliqueApp', [require('angular-route')]);
 
-const fitCliquesApp = angular.module('fitCliquesApp', ['ngRoute']);
+require('./services')(fitCliqueApp);
+require('./user')(fitCliqueApp);
+// require('./auth')(fitCliqueApp);
 
-require('./services')(fitCliquesApp);
+fitCliqueApp.config(['$routeProvider', function($rp) {
+  $rp
+  .when('/user', {
+    templateUrl: 'templates/user/views/user_view.html',
+    controller: 'UserController',
+    controllerAs: 'userctrl'
+  })
+  .when('/signin', {
+    templateUrl: 'templates/auth/views/auth_view.html',
+    controller: 'SignInController',
+    controllerAs: 'authctrl'
+  })
+  .when('/signup', {
+    templateUrl: 'templates/auth/views/auth_view.html',
+    controller: 'SignUpController',
+    controllerAs: 'authctrl'
+  })
+  .otherwise({
+    redirectTo: '/signin'
+  });
+}]);
