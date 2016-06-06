@@ -1,5 +1,6 @@
 var angular = require('angular');
 require('angular-mocks');
+const config = require('../../app/js/config');
 
 describe('user controller', function() {
   var $controller;
@@ -29,7 +30,7 @@ describe('user controller', function() {
     });
 
     it('should send a GET request to retrieve user data', function() {
-      $httpBackend.expectGET('http://localhost:5555/api/user')
+      $httpBackend.expectGET(config.baseUrl + '/api/user')
       .respond(200, [ { username: 'Phil' } ]);
       userctrl.getAll();
       $httpBackend.flush();
@@ -38,7 +39,7 @@ describe('user controller', function() {
     });
 
     it('should create a user', function() {
-      $httpBackend.expectPOST('http://localhost:5555/api/user', { username: 'Phil' })
+      $httpBackend.expectPOST(config.baseUrl + '/api/user', { username: 'Phil' })
       .respond(200, { username: 'some user' });
       expect(userctrl.user.length).toBe(0);
       userctrl.newUser = { username: 'Phil' };
