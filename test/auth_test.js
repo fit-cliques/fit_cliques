@@ -9,7 +9,7 @@ const port = process.env.PORT = 5050;
 
 const User = require(__dirname + '/../models/user');
 
-decribe('sign in route tests', () => {
+describe('sign in route tests', () => {
   before((done) => {
     setup(done);
   });
@@ -35,5 +35,34 @@ decribe('sign in route tests', () => {
 
   after((done) => {
     teardown(done);
+  });
+
+  it('should sign in and GET a new token', (done) => {
+    request('rick:mustache@localhost:' + port)
+      .get('/api/signin')
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res.status).to.eql(200);
+        expect(res.body.token.length).to.not.eql(0);
+        done();
+      });
+  });
+
+  it('should sign up a new users', (done) => {
+    request('localhost:' + port)
+      .post('/api/signup')
+      .send({
+        username: 'secondRick',
+        password: 'handlebars',
+        encodedId: '2',
+        zipCode: '98121'
+      })
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res.status).to.eql(200);
+        expect(res.body.token.length).to.not.eql(0);
+        expect(res.body.token).to.not.eql(this.token);
+        done();
+      });
   });
 });
