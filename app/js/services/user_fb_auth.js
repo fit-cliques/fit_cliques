@@ -66,6 +66,26 @@ module.exports = function(app) {
           this.bestSteps = res.data.best.total.steps;
           this.bestDistance = res.data.best.total.distance;
         });
+      },
+
+      updateFbUserToken: function() {
+        $http({
+          method: 'POST',
+          url: config.fbAuthUrl,
+          headers: {
+            'Authorization': 'Basic ' +
+              window.btoa(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET),
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            'grant_type': 'refresh_token',
+            'refresh_token': this.fbRefreshToken
+          }
+        }).then((res) => {
+          this.fbToken = res.data.access_token;
+          this.fbRefreshToken = res.data.refresh_token;
+          this.fbUserId = res.data.user_id;
+        });
       }
     };
   }]);
