@@ -3,7 +3,7 @@ const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const sass = require('gulp-sass');
 const maps = require('gulp-sourcemaps');
-// const minifyCss = require('gulp-minify-css');
+// const minifyCss = require('gulp-clean-css');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 const childProcess = require('child_process');
@@ -59,7 +59,7 @@ gulp.task('sass:dev', () => {
 });
 
 gulp.task('css:dev', ['sass:dev'], () => {
-  return gulp.src('app/**/*.css')
+  return gulp.src('app/styles/main.css')
     .pipe(gulp.dest('/build'));
 });
 
