@@ -15,41 +15,41 @@ userRouter.route('/user')
       res.send(err);
     }
     res.status(200).json(data);
-  })
-
-  .get(jwToken, (req, res) => {
-    User.find((err, userdata) => {
-      if (err) {
-        res.send(err);
-      }
-      res.send(200).json(userdata);
-    });
   });
+})
 
-  userRouter.route('/user/:user_id')
+.get(jwToken, (req, res) => {
+  User.find((err, userdata) => {
+    if (err) {
+      res.send(err);
+    }
+    res.send(200).json(userdata);
+  });
+});
 
-  .put(jwToken, (req, res) => {
-    User.findByIdAndUpdate(req.params.user_id, req.body, (err, userdata) => {
+userRouter.route('/user/:user_id')
+
+.put(jwToken, (req, res) => {
+  User.findByIdAndUpdate(req.params.user_id, req.body, (err, userdata) => {
+    if (err) {
+      res.send(err);
+    }
+    userdata.save((err) => {
       if (err) {
         res.send(err);
       }
-      userdata.save((err) => {
-        if (err) {
-          res.send(err);
-        }
-      });
-      res.status(200).json({ message: 'Successfully updated!' });
     });
-  })
+    res.status(200).json({ message: 'Successfully updated!' });
+  });
+})
 
-  .delete(jwToken, (req, res) => {
-    User.remove({
-      _id: req.params.user_id
-    }, (err) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: 'Successfully deleted!' });
-    });
+.delete(jwToken, (req, res) => {
+  User.remove({
+    _id: req.params.user_id
+  }, (err) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ message: 'Successfully deleted!' });
   });
 });
