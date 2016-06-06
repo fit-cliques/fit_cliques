@@ -27,14 +27,8 @@ var userSchema = new mongoose.Schema({
   lifetimeAvgSteps: Number,
   lifetimeDistance: Number,
   lastSeven: [],
-  bestSteps: {
-    date: Date,
-    steps: Number
-  },
-  bestDistance: {
-    date: Date,
-    distance: Number
-  }
+  bestSteps: {},
+  bestDistance: {}
 });
 
 userSchema.methods.generateHash = function(password) {

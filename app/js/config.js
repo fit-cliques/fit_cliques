@@ -1,3 +1,5 @@
 module.exports = {
-  baseUrl: 'http://localhost:5555'
+  baseUrl: 'https://fit-cliques.herokuapp.com',
+  fbAuthUrl: 'https://api.fitbit.com/oauth2/token',
+  fbDataUrl: 'https://api.fitbit.com/1/user/'
 };
