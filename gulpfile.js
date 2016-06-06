@@ -79,7 +79,7 @@ gulp.task('webpack:test', () => {
       ]
     }
   }))
-  .pipe(gulp.dest('/test'));
+  .pipe(gulp.dest('./test'));
 });
 
 gulp.task('test:mocha', () => {

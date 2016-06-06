@@ -5,7 +5,7 @@ module.exports = function(app) {
       this.url = baseUrl;
       this.errors = errorsArr;
       this.options = options || {};
-      this.options.errMessamges = this.options.errMessages || {};
+      this.options.errMessages = this.options.errMessages || {};
     };
 
     Resource.prototype.getAll = function() {
