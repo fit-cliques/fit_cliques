@@ -7,7 +7,7 @@ describe('fb user auth service', function() {
   var $httpBackend;
 
   beforeEach(function() {
-    angular.mock.module('fitCliquesApp');
+    angular.mock.module('fitCliqueApp');
     angular.mock.inject(function(_$httpBackend_) {
       $httpBackend = _$httpBackend_;
     });
