@@ -18,6 +18,11 @@ module.exports = function(app) {
         user.editing = false;
       });
     };
-    this.removeUser = crud.remove.bind(crud);
+    this.removeUser = function(user) {
+      crud.remove(user)
+        .then(() => {
+          this.user = crud.data;
+        });
+    };
   }]);
 };

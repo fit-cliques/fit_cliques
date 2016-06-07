@@ -31,7 +31,7 @@ module.exports = function(app) {
     };
 
     Resource.prototype.remove = function(resource) {
-      return $http.delete(this.url + '/' + resource._id)
+      return $http.delete(this.url + '/' + resource._id, resource)
       .then(() => {
         this.data.splice(this.data.indexOf(resource), 1);
       }, handleError(this.errors, this.options.errMessages.remove || 'could not remove data'));
