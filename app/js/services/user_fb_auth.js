@@ -3,7 +3,7 @@ const config = require('../config');
 module.exports = function(app) {
   app.factory('fbUserAuth', ['$http', '$q', function($http, $q) {
     return {
-      getFbTokens: function(urlCode) {
+      getFbTokens: function(urlCode, cb) {
         this.urlCode = urlCode;
         $http({
           method: 'POST',
@@ -23,10 +23,11 @@ module.exports = function(app) {
           this.fbToken = res.data.access_token;
           this.fbRefreshToken = res.data.refresh_token;
           this.fbUserId = res.data.user_id;
+          if (cb) cb();
         });
       },
 
-      getFbUserSteps: function(userId) {
+      getFbUserSteps: function(userId, cb) {
         $http({
           method: 'GET',
           url: config.fbDataUrl + (userId || this.fbUserId) + '/activities/date/today.json',
@@ -35,10 +36,11 @@ module.exports = function(app) {
           }
         }).then((res) => {
           this.todaySteps = res.data.summary.steps;
+          if (cb) cb();
         });
       },
 
-      getFbUserProfile: function(userId) {
+      getFbUserProfile: function(userId, cb) {
         $http({
           method: 'GET',
           url: config.fbDataUrl + (userId || this.fbUserId) + '/profile.json',
@@ -50,10 +52,11 @@ module.exports = function(app) {
           this.memberSince = res.data.user.memberSince;
           this.strideLength = res.data.user.strideLengthWalking;
           this.todayDistance = parseInt(this.todaySteps, 10) * parseInt(this.strideLength, 10);
+          if (cb) cb();
         });
       },
 
-      getFbUserActivities: function(userId) {
+      getFbUserActivities: function(userId, cb) {
         $http({
           method: 'GET',
           url: config.fbDataUrl + (userId || this.fbUserId) + '/activities.json',
@@ -65,10 +68,11 @@ module.exports = function(app) {
           this.lifeTimeDistance = res.data.lifetime.total.distance;
           this.bestSteps = res.data.best.total.steps;
           this.bestDistance = res.data.best.total.distance;
+          if (cb) cb();
         });
       },
 
-      updateFbUserToken: function() {
+      updateFbUserToken: function(cb) {
         $http({
           method: 'POST',
           url: config.fbAuthUrl,
@@ -85,6 +89,7 @@ module.exports = function(app) {
           this.fbToken = res.data.access_token;
           this.fbRefreshToken = res.data.refresh_token;
           this.fbUserId = res.data.user_id;
+          if (cb) cb();
         });
       }
     };
