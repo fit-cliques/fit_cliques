@@ -2,6 +2,7 @@ const Router = require('express').Router;
 const bodyParser = require('body-parser').json();
 const basicHTTP = require(__dirname + '/../lib/basic_http');
 const User = require(__dirname + '/../models/user');
+const jwtAuth = require(__dirname + '/../lib/jwt_auth');
 
 var authRouter = module.exports = exports = Router();
 
@@ -38,4 +39,8 @@ authRouter.get('/signin', basicHTTP, (req, res) => {
       res.json({ token });
     });
   });
+});
+
+authRouter.get('/profile', jwtAuth, (req, res) => {
+  res.send({ username: req.user.username });
 });
