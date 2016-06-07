@@ -6,9 +6,13 @@
   <link rel="stylesheet" href="application.css" />
 </head>
 <body data-ng-app="fitCliqueApp">
-  <main data-ng-view>
+  <div data-ng-controller="AuthController as globalAuth" data-ng-init="globalAuth.getUsername()">
+    <p data-ng-if="globalAuth.username">Hello: {{ globalAuth.username }} <a href data-ng-click="globalAuth.logout()">Logout</a>
+    </p>
+    <main data-ng-view>
 
-  </main>
+    </main>
+  </div>
 
 <script src="./bundle.js"></script>
 </body>

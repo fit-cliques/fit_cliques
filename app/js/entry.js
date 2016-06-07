@@ -3,7 +3,7 @@ const fitCliqueApp = angular.module('fitCliqueApp', [require('angular-route')]);
 
 require('./services')(fitCliqueApp);
 require('./user')(fitCliqueApp);
-// require('./auth')(fitCliqueApp);
+require('./auth')(fitCliqueApp);
 
 fitCliqueApp.config(['$routeProvider', function($rp) {
   $rp
