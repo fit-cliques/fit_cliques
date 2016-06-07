@@ -46,7 +46,7 @@ gulp.task('webpack:dev', ['html:dev', 'css:dev'], () => {
 
 gulp.task('html:dev', () => {
   return gulp.src('app/**/*.html')
-    .pipe(gulp.dest('/build'));
+    .pipe(gulp.dest('./build'));
 });
 
 gulp.task('sass:dev', () => {
@@ -60,7 +60,7 @@ gulp.task('sass:dev', () => {
 
 gulp.task('css:dev', ['sass:dev'], () => {
   return gulp.src('app/styles/main.css')
-    .pipe(gulp.dest('/build'));
+    .pipe(gulp.dest('./build'));
 });
 
 gulp.task('webpack:test', () => {

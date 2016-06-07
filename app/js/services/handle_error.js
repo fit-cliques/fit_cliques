@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.factory('handleError', function() {
+  app.factory('fcHandleError', function() {
     return function(errorsArr, message) {
       return function(err) {
         console.log(err);
