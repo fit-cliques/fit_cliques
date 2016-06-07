@@ -12,6 +12,15 @@ module.exports = function(app) {
       async.series([
         function(cb) {
           fbUserAuth.getFbTokens($routeParams.code, cb);
+        },
+        function(cb) {
+          fbUserAuth.getFbUserSteps(fbUserAuth.fbUserId, cb);
+        },
+        function(cb) {
+          fbUserAuth.getFbUserProfile(fbUserAuth.fbUserId, cb);
+        },
+        function(cb) {
+          fbUserAuth.getFbUserActivities(fbUserAuth.fbUserId, cb);
         }
       ]);
       // $http.post(config.baseUrl + '/api/signup', user)
