@@ -2,104 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fit Cliques</title>
-    <style type="text/css" media="screen, print">
-   @font-face {
-      font-family: "Comfortaa-Light";
-      src: url("http://www.dafont.com/comfortaa.font");
-    }
-    /*body { font-family:  "Comfortaa-Light", helvetica }
-      body {
-        background-image: url("walk-sign2.jpeg");
-        color: #66666
-        background-color: #4e5e61;
-        background-position: center;
-        line-height: 1.4em;
-        margin: opx;}
-      header {
-        height: 160px:
-        background-color: #4e5e61;
-      h1 {
-        text-indent: -9999px:
-        width: 940px;
-        height: 130px;
-        margin: opx:}
-      nav, footer {
-        clear: both;
-        color: #ffffff;
-        background-color: #aeaca8;
-        height: 30px;}
-      nav ul {
-        margin: opx;
-        padding: 5px 0px 5px 30px;}
-      nav li {
-        display: inline;
-        margin-right: 40px;}
-      nav li a {
-        color: #ffffff;}
-      nav li a:hover, nav li a.current {
-        color: #000000;}
-      section.courses {
-        float: left;
-        width: 659px;
-        border-right: 1px solid #eeeeee;}
-        article {
-          clear: both;
-          overflow: auto;
-          width: 100%;
-        hgroup {
-          margin-top: 40px;
-        figure {
-          float: left;
-          width: 290px;
-          height: 220px;
-          padding: 5px;
-          margin: 20px;
-          border: 1px solid #eeeeee;}
-        aside {
-          width: 230px;
-          float: left;
-          padding: 0px 0px 0px 20px;}
-        }
-        }
-        }*/
-    </style>
+  <title></title>
+  <style>
+  #map {
+    width: 500px;
+    height: 400px;
+    backgound-color: #CCC;
+  }
+  </style>
 </head>
 <body>
-    <header>
-      <h1>Fit Cliques</h1>
-      <nav>
-        <ul>
-          <li><a href="" class="current">home</a></li>
-          <li><a href="" class="sign up">sign up</a></li>
-        </ul>
-      </nav>
-  </header>
-  <section class="tbd">
-    <article>
-      <figure>
-        <img src="images/walk-sign2.jpeg" alt="Photograph of an urban walk sign."/>
-      </figure>
-    </section>
-      <hgroup>
-        <h2>Form Content Somewhere</h2>
-      </hgroup>
-    </article>
-  <aside>
-    <section class="media">
-      <h2>something on the side possibly social media</h2>
-      <a href=""></a>
-      <a href=""></a>
-      <a href=""></a>
-  </aside>
-    </section>
-    <section class="contact-details">
-      <h2>Contact Fit Cliques</h2>
-      <p>Contact Content</p>
-    </section>
-  <footer>
-  something in the footer
-  </footer>
-
-  </body>
+  <div id="map"></div>
+    <script>
+      function initMap() {
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 44.540, lng: -78.546},
+          zoom: 8
+        });
+      }
+    </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Av8ON9ivqCtz6CkLrSt_SWJvI8PAR9E"
+    async defer></script>
+</body>
 </html>
