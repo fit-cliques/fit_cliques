@@ -1,10 +1,11 @@
 const config = require('../config');
 
 module.exports = function(app) {
-  app.factory('fbUserAuth', ['$http', '$q', function($http, $q) {
+  app.factory('fbUserAuth', ['$http', '$q', 'fcHandleError', function($http, $q, handleError) {
     return {
       getFbTokens: function(urlCode, cb) {
         this.user = {};
+        this.errors = [];
         this.urlCode = urlCode;
         $http({
           method: 'POST',
@@ -20,14 +21,11 @@ module.exports = function(app) {
             '&redirect_uri=http%3A%2F%2Flocalhost:5555%2Fsignup' +
             '&code=' + urlCode
         }).then((res) => {
-          console.log(res.data);
           this.user.fbToken = res.data.access_token;
           this.user.fbRefreshToken = res.data.refresh_token;
           this.user.fbUserId = res.data.user_id;
           if (cb) cb();
-        }, (errRes) => {
-          console.log(errRes);
-        });
+        }, handleError(this.errors, 'could not get username'));
       },
 
       getFbUserSteps: function(userId, cb) {
@@ -38,12 +36,9 @@ module.exports = function(app) {
             'Authorization': 'Bearer ' + this.user.fbToken
           }
         }).then((res) => {
-          console.log(res.data);
           this.user.todaySteps = res.data.summary.steps;
           if (cb) cb();
-        }, (errRes) => {
-          console.log(errRes);
-        });
+        }, handleError(this.errors, 'could not get username'));
       },
 
       getFbUserProfile: function(userId, cb) {
@@ -54,16 +49,13 @@ module.exports = function(app) {
             'Authorization': 'Bearer ' + this.user.fbToken
           }
         }).then((res) => {
-          console.log(res.data);
           this.user.encodedId = res.data.user.encodedId;
           this.user.memberSince = res.data.user.memberSince;
           this.user.strideLength = res.data.user.strideLengthWalking;
           this.user.todayDistance = parseInt(this.user.todaySteps, 10) *
             parseInt(this.user.strideLength, 10);
           if (cb) cb();
-        }, (errRes) => {
-          console.log(errRes);
-        });
+        }, handleError(this.errors, 'could not get username'));
       },
 
       getFbUserActivities: function(userId, cb) {
@@ -74,15 +66,12 @@ module.exports = function(app) {
             'Authorization': 'Bearer ' + this.user.fbToken
           }
         }).then((res) => {
-          console.log(res.data);
           this.user.lifeTimeSteps = res.data.lifetime.total.steps;
           this.user.lifeTimeDistance = res.data.lifetime.total.distance;
           this.user.bestSteps = res.data.best.total.steps;
           this.user.bestDistance = res.data.best.total.distance;
           if (cb) cb();
-        }, (errRes) => {
-          console.log(errRes);
-        });
+        }, handleError(this.errors, 'could not get username'));
       },
 
       updateFbUserToken: function(cb) {
@@ -101,9 +90,7 @@ module.exports = function(app) {
           this.user.fbRefreshToken = res.data.refresh_token;
           this.user.fbUserId = res.data.user_id;
           if (cb) cb();
-        }, (errRes) => {
-          console.log(errRes);
-        });
+        }, handleError(this.errors, 'could not get username'));
       }
     };
   }]);

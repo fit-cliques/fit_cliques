@@ -22,7 +22,10 @@ module.exports = function(app) {
         function(cb) {
           fbUserAuth.getFbUserActivities(fbUserAuth.fbUserId, cb);
         }
-      ]);
+      ], function(err) {
+        if (err) console.log(err);
+        console.log(fbUserAuth.user);
+      });
       // $http.post(config.baseUrl + '/api/signup', user)
       //   .then((res) => {
       //     fitCliqueAuth.saveToken(res.data.token);
