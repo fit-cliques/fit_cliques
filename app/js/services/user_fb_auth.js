@@ -52,8 +52,10 @@ module.exports = function(app) {
           this.user.encodedId = res.data.user.encodedId;
           this.user.memberSince = res.data.user.memberSince;
           this.user.strideLength = res.data.user.strideLengthWalking;
-          this.user.todayDistance = parseInt(this.user.todaySteps, 10) *
-            parseInt(this.user.strideLength, 10);
+          var strideNum = parseInt(this.user.strideLength, 10);
+          var todayStepNum = parseInt(this.user.todaySteps, 10);
+          var todayDistNum = todayStepNum / 2 * strideNum * 0.00001578;
+          this.user.todayDistance = todayDistNum.toFixed(2);
           if (cb) cb();
         }, handleError(this.errors, 'could not get username'));
       },
