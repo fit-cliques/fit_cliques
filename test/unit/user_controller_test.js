@@ -48,5 +48,24 @@ describe('user controller', function() {
       expect(userctrl.user[0].username).toBe('some user');
       expect(userctrl.newUser).toBe(null);
     });
+
+    it('should update a user', function() {
+      $httpBackend.expectPUT(config.baseUrl + '/api/user/1',
+      { username: 'updated user!', _id: 1 }).respond(200);
+      userctrl.user = [{ username: 'test user', _id: 1 }];
+      userctrl.user[0].username = 'updated user!';
+      userctrl.updateUser(userctrl.user[0]);
+      $httpBackend.flush();
+      expect(userctrl.user[0].editing).toBe(false);
+    });
+
+    it('should remove a user', function() {
+      $httpBackend.expectDELETE(config.baseUrl + '/api/user/1').respond(200);
+      userctrl.user = [{ username: 'test user', _id: 1 }];
+      userctrl.removeUser(userctrl.user[0]);
+      $httpBackend.flush();
+      console.log(userctrl.user);
+      expect(userctrl.user.length).toBe(0);
+    });
   });
 });
