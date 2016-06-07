@@ -3,8 +3,8 @@ const async = require('async');
 
 module.exports = function(app) {
   app.controller('SignUpController', ['$http', '$location', '$routeParams',
-  'fcHandleError', 'fbUserAuth', function($http, $location, $routeParams,
-  handleError, fbUserAuth) {
+  'fcHandleError', 'fitCliqueAuth', 'fbUserAuth', function($http, $location, $routeParams,
+  handleError, fitCliqueAuth, fbUserAuth) {
     this.errors = [];
     this.buttonText = 'Create New User';
 
@@ -24,14 +24,15 @@ module.exports = function(app) {
         }
       ], function(err) {
         if (err) console.log(err);
-        console.log(fbUserAuth.user);
+        Object.assign(user, fbUserAuth.user);
+
+        $http.post(config.baseUrl + '/api/signup', user)
+          .then((res) => {
+            fitCliqueAuth.saveToken(res.data.token);
+            fitCliqueAuth.getUsername();
+            $location.path('/user');
+          }, handleError(this.errors, 'could not create user'));
       });
-      // $http.post(config.baseUrl + '/api/signup', user)
-      //   .then((res) => {
-      //     fitCliqueAuth.saveToken(res.data.token);
-      //     fitCliqueAuth.getUsername();
-      //     $location.path('/user');
-      //   }, handleError(this.errors, 'could not create user'));
     };
   }]);
 };
