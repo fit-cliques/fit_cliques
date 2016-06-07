@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   findHash: { type: String, unique: true },
-  encodedId: { type: String, unique: true },
+  encodedId: String,
   fitbitToken: String,
   fitbitRefreshToken: String,
   secQuestion1: String,
