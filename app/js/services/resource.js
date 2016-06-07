@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.factory('crudResource', ['$http', 'handleError', function($http, handleError) {
+  app.factory('crudResource', ['$http', 'fcHandleError', function($http, handleError) {
     var Resource = function(resourceArr, errorsArr, baseUrl, options) {
       this.data = resourceArr;
       this.url = baseUrl;
@@ -31,7 +31,7 @@ module.exports = function(app) {
     };
 
     Resource.prototype.remove = function(resource) {
-      return $http.delete(this.url + '/' + resource._id)
+      return $http.delete(this.url + '/' + resource._id, resource)
       .then(() => {
         this.data.splice(this.data.indexOf(resource), 1);
       }, handleError(this.errors, this.options.errMessages.remove || 'could not remove data'));
