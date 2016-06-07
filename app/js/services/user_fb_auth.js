@@ -13,17 +13,19 @@ module.exports = function(app) {
               window.btoa(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET),
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          data: {
-            'clientId': process.env.CLIENT_ID,
-            'grant_type': 'authorization_code',
-            'redirect_uri': 'https%3A%2F%2Ffit-cliques.herokuapp.com%2Fsignup',
-            'code': urlCode
-          }
+          data: 'grant_type=authorization_code' +
+            '&clientId=' + process.env.CLIENT_ID +
+            // 'redirect_uri': 'https%3A%2F%2Ffit-cliques.herokuapp.com%2Fsignup',
+            '&redirect_uri=http%3A%2F%2Flocalhost:5555%2Fsignup' +
+            '&code=' + urlCode
         }).then((res) => {
+          console.log(res.data);
           this.fbToken = res.data.access_token;
           this.fbRefreshToken = res.data.refresh_token;
           this.fbUserId = res.data.user_id;
           if (cb) cb();
+        }, (errRes) => {
+          console.log(errRes);
         });
       },
 
