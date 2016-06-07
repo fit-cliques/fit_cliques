@@ -64,7 +64,6 @@ describe('user controller', function() {
       userctrl.user = [{ username: 'test user', _id: 1 }];
       userctrl.removeUser(userctrl.user[0]);
       $httpBackend.flush();
-      console.log(userctrl.user);
       expect(userctrl.user.length).toBe(0);
     });
   });
