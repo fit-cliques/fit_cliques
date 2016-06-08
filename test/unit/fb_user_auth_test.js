@@ -60,7 +60,10 @@ describe('fb user auth service', function() {
     expect(fbUserAuth.user.encodedId).toBe('6');
     expect(fbUserAuth.user.memberSince).toBe('01-01-2016');
     expect(fbUserAuth.user.strideLength).toBe('3');
-    expect(fbUserAuth.user.todayDistance).toBe(fbUserAuth.user.todaySteps * fbUserAuth.user.strideLength);
+    var strideNum = parseInt(fbUserAuth.user.strideLength, 10);
+    var todayStepNum = parseInt(fbUserAuth.user.todaySteps, 10);
+    var todayDistNum = todayStepNum / 2 * strideNum * 0.00001578;
+    expect(fbUserAuth.user.todayDistance).toBe(todayDistNum.toFixed(2));
   }));
 
   it('should get user\'s activities', angular.mock.inject(function(fbUserAuth) {
@@ -87,13 +90,14 @@ describe('fb user auth service', function() {
     fbUserAuth.user = {
       access_token: '12345',
       refresh_token: '789',
-      user_id: 'awesomeFbUser'
+      user_id: 'awesomeFbUser',
+      memberSince: '2016-01-01'
     };
 
     fbUserAuth.getFbUserActivities(2);
     $httpBackend.flush();
-    expect(fbUserAuth.user.lifeTimeSteps).toBe(1);
-    expect(fbUserAuth.user.lifeTimeDistance).toBe(3);
+    expect(fbUserAuth.user.lifetimeSteps).toBe(1);
+    expect(fbUserAuth.user.lifetimeDistance).toBe(3);
     expect(fbUserAuth.user.bestSteps.date).toBe('2016-01-02');
     expect(fbUserAuth.user.bestSteps.value).toBe(1);
     expect(fbUserAuth.user.bestDistance.date).toBe('2016-02-01');

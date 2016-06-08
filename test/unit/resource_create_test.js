@@ -16,7 +16,7 @@ describe('crudResource', function() {
     var userArray = [];
     var baseUrl = config.baseUrl + '/api/user';
     var errorsArray = [];
-    var resource = new crudResource(userArray, errorsArray, baseUrl);
+    var resource = new crudResource(userArray, errorsArray, baseUrl); // eslint-disable-line new-cap
     resource.create({ username: 'Phil' });
     $httpBackend.flush();
     expect(userArray.length).toBe(1);
