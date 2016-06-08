@@ -21,6 +21,9 @@ module.exports = function(app) {
         },
         function(cb) {
           fbUserAuth.getFbUserActivities(fbUserAuth.fbUserId, cb);
+        },
+        function(cb) {
+          fbUserAuth.getFbUserWeek(fbUserAuth.fbUserId, cb);
         }
       ], function(err) {
         if (err) console.log(err);

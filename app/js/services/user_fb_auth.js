@@ -25,7 +25,7 @@ module.exports = function(app) {
           this.user.fbRefreshToken = res.data.refresh_token;
           this.user.fbUserId = res.data.user_id;
           if (cb) cb();
-        }, handleError(this.errors, 'could not get username'));
+        }, handleError(this.errors, 'could not get tokens'));
       },
 
       getFbUserSteps: function(userId, cb) {
@@ -38,7 +38,7 @@ module.exports = function(app) {
         }).then((res) => {
           this.user.todaySteps = res.data.summary.steps;
           if (cb) cb();
-        }, handleError(this.errors, 'could not get username'));
+        }, handleError(this.errors, 'could not get steps'));
       },
 
       getFbUserProfile: function(userId, cb) {
@@ -57,7 +57,7 @@ module.exports = function(app) {
           var todayDistNum = todayStepNum / 2 * strideNum * 0.00001578;
           this.user.todayDistance = todayDistNum.toFixed(2);
           if (cb) cb();
-        }, handleError(this.errors, 'could not get username'));
+        }, handleError(this.errors, 'could not get profile'));
       },
 
       getFbUserActivities: function(userId, cb) {
@@ -68,10 +68,39 @@ module.exports = function(app) {
             'Authorization': 'Bearer ' + this.user.fbToken
           }
         }).then((res) => {
-          this.user.lifeTimeSteps = res.data.lifetime.total.steps;
-          this.user.lifeTimeDistance = res.data.lifetime.total.distance;
+          this.user.lifetimeSteps = res.data.lifetime.total.steps;
+          this.user.lifetimeDistance = res.data.lifetime.total.distance;
           this.user.bestSteps = res.data.best.total.steps;
           this.user.bestDistance = res.data.best.total.distance;
+          var curDate = new Date();
+          var dateArr = this.user.memberSince.split('-');
+          var memberSince = new Date(dateArr[0], dateArr[1], dateArr[2]);
+          var numDays = Math.round(Math.abs(+curDate - +memberSince) / 8.64e7);
+          this.user.lifetimeAvgSteps = this.user.lifetimeSteps / numDays;
+          this.user.lifetimeAvgSteps = +this.user.lifetimeAvgSteps.toFixed();
+          if (cb) cb();
+        }, handleError(this.errors, 'could not get lifetime'));
+      },
+
+      getFbUserWeek: function(userId, cb) {
+        $http({
+          method: 'GET',
+          url: config.fbDataUrl + (userId || this.user.fbUserId) +
+          '/activities/steps/date/today/1w.json',
+          headers: {
+            'Authorization': 'Bearer ' + this.user.fbToken
+          }
+        }).then((res) => {
+          this.user.lastSeven = res.data['activities-steps'];
+          this.user.weekSteps = 0;
+          this.user.lastSeven.forEach((ele) => {
+            this.user.weekSteps += parseInt(ele.value, 10);
+          });
+          this.user.weekAvgSteps = this.user.weekSteps / 7;
+          this.user.weekAvgSteps = +this.user.weekAvgSteps.toFixed();
+          var strideNum = parseInt(this.user.strideLength, 10);
+          var weekDistNum = this.user.weekSteps / 2 * strideNum * 0.00001578;
+          this.user.weekDistance = +weekDistNum.toFixed(2);
           if (cb) cb();
         }, handleError(this.errors, 'could not get username'));
       },
