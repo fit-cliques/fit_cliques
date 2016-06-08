@@ -17,7 +17,7 @@ userRouter.route('/user')
   });
 })
 
-.get(jwToken, (req, res) => {
+.get((req, res) => {
   User.find((err, userdata) => {
     if (err) return handleErr(err, res);
     res.status(200).json(userdata);
@@ -26,7 +26,7 @@ userRouter.route('/user')
 
 userRouter.route('/user/:user_id')
 
-.get(jwToken, (req, res) => {
+.get((req, res) => {
   User.findById(req.params.user_id, (err, userdata) => {
     if (err) return handleErr(err, res);
     res.status(200).json(userdata);
