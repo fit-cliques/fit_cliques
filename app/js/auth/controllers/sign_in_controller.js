@@ -22,8 +22,7 @@ module.exports = function(app) {
             console.log(currentUser);
             $http({
               method: 'GET',
-              url: config.baseUrl + '/api/user/' + currentUser._id,
-              headers: { token: window.localStorage.token }
+              url: config.baseUrl + '/api/user/' + currentUser._id
             }).then((res) => {
               fbUserAuth.user = res.data;
               async.series([

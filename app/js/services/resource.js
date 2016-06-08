@@ -9,7 +9,7 @@ module.exports = function(app) {
     };
 
     Resource.prototype.getAll = function() {
-      return $http.get(this.url, { headers: { token: window.localStorage.token } })
+      return $http.get(this.url)
       .then((res) => {
         this.data.splice(0);
         for (var i = 0; i < res.data.length; i++) {
