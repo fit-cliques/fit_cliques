@@ -15,7 +15,7 @@ describe('deleting a user', function() {
     var userArray = [{ username: 'Phil', _id: 1 }];
     var errorsArray = [];
     var baseUrl = config.baseUrl + '/api/user';
-    var resource = new crudResource(userArray, errorsArray, baseUrl);
+    var resource = new crudResource(userArray, errorsArray, baseUrl); // eslint-disable-line new-cap
 
     resource.remove(userArray[0]);
     $httpBackend.flush();

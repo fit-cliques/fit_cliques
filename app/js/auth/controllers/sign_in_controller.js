@@ -19,7 +19,6 @@ module.exports = function(app) {
         fitCliqueAuth.saveToken(res.data.token);
         fitCliqueAuth.getUsername()
           .then((currentUser) => {
-            console.log(currentUser);
             $http({
               method: 'GET',
               url: config.baseUrl + '/api/user/' + currentUser._id,
