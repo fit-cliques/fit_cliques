@@ -27,7 +27,8 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "jsonwebtoken": "^7.0.0",
-    "mongoose": "^4.4.19"
+    "mongoose": "^4.4.19",
+    "superagent": "^2.0.0"
   },
   "devDependencies": {
     "angular": "^1.5.6",
