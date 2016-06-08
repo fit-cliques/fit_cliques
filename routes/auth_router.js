@@ -42,5 +42,5 @@ authRouter.get('/signin', basicHTTP, (req, res) => {
 });
 
 authRouter.get('/profile', jwtAuth, (req, res) => {
-  res.send({ username: req.user.username });
+  res.send({ username: req.user.username, _id: req.user._id });
 });
