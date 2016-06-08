@@ -11,12 +11,18 @@ const angularProtractor = require('gulp-angular-protractor');
 const KarmaServer = require('karma').Server;
 
 var apiFiles = ['./*.js', './lib/*.js', './models/*.js', './routes/*.js'];
-var appFiles = ['./app/**/*.js'];
+var appFiles = ['./app/**/*.js', 'app/index.html'];
 var testFiles = ['./test/*test.js'];
 var unitFiles = ['./test/unit/**/*test.js'];
 var specFiles = ['./test/integration/**/*spec.js'];
 
 var children = [];
+
+gulp.task('watch', function() {
+  gulp.watch(apiFiles, ['build:dev']);
+  gulp.watch(appFiles, ['build:dev']);
+  gulp.watch(testFiles, ['webpack:test', 'test']);
+});
 
 gulp.task('startservers:test', () => {
   process.env.PORT = 5505;

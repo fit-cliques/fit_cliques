@@ -1,10 +1,10 @@
 const angular = require('angular');
 const fitCliqueApp = angular.module('fitCliqueApp', [require('angular-route')]);
-require('./displaymap');
 
 require('./services')(fitCliqueApp);
 require('./user')(fitCliqueApp);
 require('./auth')(fitCliqueApp);
+require('./map')(fitCliqueApp);
 
 fitCliqueApp.config(['$routeProvider', function($rp) {
   $rp

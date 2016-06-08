@@ -1,10 +1,9 @@
 module.exports = {
-  initMap: function(currentLat, currentLng) {
+  initMap: function() {
     var mapDiv = document.getElementById('map');
     var map = new google.maps.Map(mapDiv, {
-      center: new google.maps.LatLng(currentLat, currentLng),
-      zoom: 15,
-      mapTypeId:google.maps.MapTypeId.ROADMAP
-    });
-  }
+      center: { lat: 47.608013, lng: -122.335167 },
+      zoom: 8
+    }
+  );}
 };

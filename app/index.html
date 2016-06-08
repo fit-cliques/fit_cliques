@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Fit Clique</title>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Av8ON9ivqCtz6CkLrSt_SWJvI8PAR9E"
+    async defer>
+  </script>
+  <script src='angular-google-maps[.min].js'></script>
   <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body data-ng-app="fitCliqueApp">
@@ -12,19 +16,12 @@
     <main data-ng-view>
     </main>
   </div>
-<div id="map"></div>
+<div data-ng-controller="MapController as mapCtrl">
+  <div id="map"></div>
+  <!-- <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+    <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+  </div> -->
+</div>
 <script src="./bundle.js"></script>
-<script>
-  function initMap() {
-     var mapDiv = document.getElementById('map');
-     var map = new google.maps.Map(mapDiv, {
-     center: {lat: 44.540, lng: -78.546},
-     zoom: 8,
- });
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Av8ON9ivqCtz6CkLrSt_SWJvI8PAR9E&callback=initMap"
-  async defer>
-</script>
 </body>
 </html>
