@@ -38,7 +38,7 @@ gulp.task('webpack:dev', ['html:dev', 'css:dev'], () => {
         filename: 'bundle.js'
       },
       plugins: [
-        new webpack.EnvironmentPlugin(['PORT'])
+        new webpack.EnvironmentPlugin(['PORT', 'CLIENT_ID', 'CLIENT_SECRET'])
       ]
     }))
     .pipe(gulp.dest('./build'));

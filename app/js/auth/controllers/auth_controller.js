@@ -6,7 +6,7 @@ module.exports = function(app) {
     this.getUsername = function() {
       fitCliqueAuth.getUsername()
         .then((currentUser) => {
-          this.username = currentUser;
+          this.username = currentUser.username;
         }, handleError(this.errors, 'could not get username'));
     }.bind(this);
 

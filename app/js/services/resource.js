@@ -9,7 +9,7 @@ module.exports = function(app) {
     };
 
     Resource.prototype.getAll = function() {
-      return $http.get(this.url)
+      return $http.get(this.url, { headers: { token: window.localStorage.token } })
       .then((res) => {
         this.data.splice(0);
         for (var i = 0; i < res.data.length; i++) {
@@ -19,19 +19,21 @@ module.exports = function(app) {
     };
 
     Resource.prototype.create = function(resource) {
-      return $http.post(this.url, resource)
+      return $http.post(this.url, resource, { headers: { token: window.localStorage.token } })
       .then((res) => {
         this.data.push(res.data);
       }, handleError(this.errors, this.options.errMessages.create || 'could not save data'));
     };
 
     Resource.prototype.update = function(resource) {
-      return $http.put(this.url + '/' + resource._id, resource)
+      return $http.put(this.url + '/' + resource._id, resource,
+      { headers: { token: window.localStorage.token } })
       .catch(handleError(this.errors, this.options.errMessages.update) || 'could not be updated');
     };
 
     Resource.prototype.remove = function(resource) {
-      return $http.delete(this.url + '/' + resource._id, resource)
+      return $http.delete(this.url + '/' + resource._id, resource,
+      { headers: { token: window.localStorage.token } })
       .then(() => {
         this.data.splice(this.data.indexOf(resource), 1);
       }, handleError(this.errors, this.options.errMessages.remove || 'could not remove data'));

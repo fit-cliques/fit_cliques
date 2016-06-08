@@ -1,8 +1,10 @@
 var config = require('../../config');
+const async = require('async');
 
 module.exports = function(app) {
-  app.controller('SignInController', ['$http', '$location', 'fcHandleError', 'fitCliqueAuth',
-  function($http, $location, handleError, fitCliqueAuth) {
+  app.controller('SignInController', ['$http', '$location',
+  'fcHandleError', 'fitCliqueAuth', 'fbUserAuth',
+  function($http, $location, handleError, fitCliqueAuth, fbUserAuth) {
     this.buttonText = 'Sign in to existing user';
     this.errors = [];
 
@@ -15,8 +17,37 @@ module.exports = function(app) {
         }
       }).then((res) => {
         fitCliqueAuth.saveToken(res.data.token);
-        fitCliqueAuth.getUsername();
-        $location.path('/user');
+        fitCliqueAuth.getUsername()
+          .then((currentUser) => {
+            console.log(currentUser);
+            $http({
+              method: 'GET',
+              url: config.baseUrl + '/api/user/' + currentUser._id,
+              headers: { token: window.localStorage.token }
+            }).then((res) => {
+              fbUserAuth.user = res.data;
+              async.series([
+                function(cb) {
+                  fbUserAuth.updateFbUserToken(cb);
+                },
+                function(cb) {
+                  fbUserAuth.getFbUserSteps(fbUserAuth.fbUserId, cb);
+                },
+                function(cb) {
+                  fbUserAuth.getFbUserProfile(fbUserAuth.fbUserId, cb);
+                },
+                function(cb) {
+                  fbUserAuth.getFbUserActivities(fbUserAuth.fbUserId, cb);
+                },
+                function(cb) {
+                  fbUserAuth.getFbUserWeek(fbUserAuth.fbUserId, cb);
+                }
+              ], function(err) {
+                if (err) console.log(err);
+                $location.path('/user');
+              });
+            });
+          });
       }, handleError(this.errors, 'could not sign in to user'));
     };
   }]);
