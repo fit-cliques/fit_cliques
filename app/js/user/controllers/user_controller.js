@@ -4,7 +4,8 @@ module.exports = function(app) {
   app.controller('UserController', ['crudResource', function(Resource) {
     this.user = [];
     this.errors = [];
-    var crud = new Resource(this.user, this.errors, baseUrl + '/api/user', { errMessage: { getAll: 'custom error message' } });
+    var crud = new Resource(this.user, this.errors, baseUrl + '/api/user',
+    { errMessage: { getAll: 'custom error message' } });
     this.getAll = crud.getAll.bind(crud);
     this.createUser = function() {
       crud.create(this.newUser)

@@ -33,6 +33,7 @@
     "angular": "^1.5.6",
     "angular-mocks": "^1.5.6",
     "angular-route": "^1.5.6",
+    "async": "^1.5.2",
     "babel-core": "^6.9.1",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",

@@ -8,12 +8,11 @@ module.exports = function(app) {
       removeToken: function() {
         this.token = null;
         this.username = null;
-        $http.defaults.headers.common.token = null;
+        this._id = null;
         window.localStorage.token = '';
       },
       saveToken: function(token) {
         this.token = token;
-        $http.defaults.headers.common.token = token;
         window.localStorage.token = token;
         return token;
       },
@@ -23,13 +22,17 @@ module.exports = function(app) {
       },
       getUsername: function() {
         return $q(function(resolve, reject) {
-          if (this.username) return resolve(this.username);
+          if (this.username && this._id) {
+            return resolve({ username: this.username, _id: this._id });
+          }
           if (!this.getToken()) return reject(new Error('no app auth token'));
 
-          $http.get(config.baseUrl + '/api/profile')
+          $http.get(config.baseUrl + '/api/profile',
+          { headers: { token: window.localStorage.token } })
             .then((res) => {
               this.username = res.data.username;
-              resolve(res.data.username);
+              this._id = res.data._id;
+              resolve({ username: res.data.username, _id: res.data._id });
             }, reject);
         }.bind(this));
       }
