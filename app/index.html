@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Fit Clique</title>
-  <link rel="stylesheet" href="application.css" />
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Av8ON9ivqCtz6CkLrSt_SWJvI8PAR9E"
+    async defer>
+  </script>
+  <script src='angular-google-maps.min.js'></script>
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body data-ng-app="fitCliqueApp">
   <div data-ng-controller="AuthController as globalAuth" data-ng-init="globalAuth.getUsername()">
     <p data-ng-if="globalAuth.username">Hello: {{ globalAuth.username }} <a href data-ng-click="globalAuth.logout()">Logout</a>
     </p>
     <main data-ng-view>
-
     </main>
   </div>
-
+<div data-ng-controller="MapController as mapCtrl">
+  <div id="map"></div>
+  <!-- <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+    <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+  </div> -->
+</div>
 <script src="./bundle.js"></script>
 </body>
 </html>
