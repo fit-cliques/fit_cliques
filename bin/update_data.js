@@ -1,16 +1,18 @@
 const sa = require('superagent');
 const config = require('../app/js/config');
 const async = require('async');
+const mongoose = require('mongoose');
 const User = require(__dirname + '/../models/user');
 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fit_cliques_DB');
 
 const update = function() {
-  User.find((err, allUsers) => {
+  User.find(null, (err, allUsers) => {
     if (err) return console.log(err);
     allUsers.forEach((ele) => {
-      var user;
-      const authBuffer = new Buffer(process.env.CLIENT_ID +
-        ':' + process.env.CLIENT_SECRET, 'base64').toString();
+      var user = {};
+      var authBuffer = new Buffer(process.env.CLIENT_ID +
+        ':' + process.env.CLIENT_SECRET, 'binary').toString('base64');
       async.series([
         function(cb) {
           sa.post(config.fbAuthUrl)
@@ -20,9 +22,9 @@ const update = function() {
           ele.fbRefreshToken)
           .end((err, res) => {
             if (err) return console.log(err);
-            user.fbToken = res.data.access_token;
-            user.fbRefreshToken = res.data.refresh_token;
-            user.fbUserId = res.data.user_id;
+            user.fbToken = res.body.access_token;
+            user.fbRefreshToken = res.body.refresh_token;
+            user.fbUserId = res.body.user_id;
             if (cb) cb();
           });
         },
@@ -31,7 +33,7 @@ const update = function() {
           .set({ 'Authorization': 'Bearer ' + user.fbToken })
           .end((err, res) => {
             if (err) return console.log(err);
-            user.todaySteps = res.data.summary.steps;
+            user.todaySteps = res.body.summary.steps;
             if (cb) cb();
           });
         },
@@ -40,9 +42,9 @@ const update = function() {
           .set({ 'Authorization': 'Bearer ' + user.fbToken })
           .end((err, res) => {
             if (err) return console.log(err);
-            user.encodedId = res.data.user.encodedId;
-            user.memberSince = res.data.user.memberSince;
-            user.strideLength = res.data.user.strideLengthWalking;
+            user.encodedId = res.body.user.encodedId;
+            user.memberSince = res.body.user.memberSince;
+            user.strideLength = res.body.user.strideLengthWalking;
             var strideNum = parseInt(user.strideLength, 10);
             var todaySteps = parseInt(user.todaySteps, 10);
             user.todayDistance = (todaySteps / 2 * strideNum * 0.00001578).toFixed(2);
@@ -54,10 +56,10 @@ const update = function() {
           .set({ 'Authorization': 'Bearer ' + user.fbToken })
           .end((err, res) => {
             if (err) return console.log(err);
-            user.lifetimeSteps = res.data.lifetime.total.steps;
-            user.lifetimeDistance = res.data.lifetime.toal.distance;
-            user.bestSteps = res.data.best.total.steps;
-            user.bestDistance = res.data.best.total.distance;
+            user.lifetimeSteps = res.body.lifetime.total.steps;
+            user.lifetimeDistance = res.body.lifetime.total.distance;
+            user.bestSteps = res.body.best.total.steps;
+            user.bestDistance = res.body.best.total.distance;
             var curDate = new Date();
             var dateArr = user.memberSince.split('-');
             var memberSince = new Date(dateArr[0], dateArr[1], dateArr[2]);
@@ -72,7 +74,7 @@ const update = function() {
             .set({ 'Authorization': 'Bearer ' + user.fbToken })
             .end((err, res) => {
               if (err) return console.log(err);
-              user.lastSeven = res.data['activities-steps'];
+              user.lastSeven = res.body['activities-steps'];
               user.weekSteps = 0;
               user.lastSeven.forEach((val) => {
                 user.weekSteps += parseInt(val.value, 10);
