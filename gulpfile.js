@@ -18,7 +18,7 @@ var specFiles = ['./test/integration/**/*spec.js'];
 
 var children = [];
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   gulp.watch(apiFiles, ['build:dev']);
   gulp.watch(appFiles, ['build:dev']);
   gulp.watch(testFiles, ['webpack:test', 'test']);

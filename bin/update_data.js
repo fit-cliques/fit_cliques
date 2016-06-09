@@ -89,7 +89,7 @@ const update = function() {
         if (err) return console.log(err);
         User.findByIdAndUpdate(ele._id, user, (err) => {
           if (err) return console.log(err);
-          console.log('update_data.js run successfully');
+          console.log('update_data');
         });
       });
     });
