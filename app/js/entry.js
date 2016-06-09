@@ -10,8 +10,8 @@ fitCliqueApp.config(['$routeProvider', function($rp) {
   $rp
   .when('/user', {
     templateUrl: 'templates/user/views/user_view.html',
-    controller: 'UserController',
-    controllerAs: 'userctrl'
+    controller: 'MapController',
+    controllerAs: 'mapCtrl'
   })
   .when('/signin', {
     templateUrl: 'templates/auth/views/sign_in_view.html',

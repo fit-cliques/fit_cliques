@@ -4,6 +4,38 @@ const async = require('async');
 module.exports = function(app) {
   app.controller('MapController', ['$http', 'fbUserAuth', function($http, fbUserAuth) {
     var mapEle = document.getElementById('map');
+
+    var ctx = document.getElementById('myChart');
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['98004', '98115'],
+        datasets: [{
+          label: '# of Votes',
+          data: [400, 500],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
     console.log(fbUserAuth);
 
     $http.get(config.baseUrl + '/api/zipcode')
