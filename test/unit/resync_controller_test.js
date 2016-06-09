@@ -34,6 +34,7 @@ describe('auth controller', function() {
 
     $httpBackend.expectGET(config.baseUrl + '/api/user/55555')
       .respond(200, {
+        _id: 55555,
         username: 'testuser',
         encodedId: 'id',
         fbToken: 'token1',
@@ -98,6 +99,9 @@ describe('auth controller', function() {
       .respond(200, {
         'activities-steps': [100, 100, 100, 100, 100, 100, 100]
       });
+
+    $httpBackend.expectPUT(config.baseUrl + '/api/user/55555')
+      .respond(200);
 
     authctrl.authenticate({ username: 'Phil' });
     $httpBackend.flush();
