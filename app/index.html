@@ -4,24 +4,47 @@
   <meta charset="UTF-8">
   <title>Fit Clique</title>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Av8ON9ivqCtz6CkLrSt_SWJvI8PAR9E"
-    async defer>
+  async defer>
   </script>
   <script src='angular-google-maps.min.js'></script>
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body data-ng-app="fitCliqueApp">
+  <header>
+    <div class="inner">
+      <img class="logo" src="http://s33.postimg.org/mfg7ygg27/Drawing.png" />
+      <img class="hamburger" src="http://s33.postimg.org/z1wvgh1lb/hamburger.png" />
+      <nav class="menu">
+        <ul>
+          <li>About</li>
+          <li>Sign Up/Sign In</li>
+          <li>Statistics</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div id="banner-container">
+    <h1>FitCliques</h1>
+  </div>
   <div data-ng-controller="AuthController as globalAuth" data-ng-init="globalAuth.getUsername()">
     <p data-ng-if="globalAuth.username">Hello: {{ globalAuth.username }} <a href data-ng-click="globalAuth.logout()">Logout</a>
     </p>
     <main data-ng-view>
     </main>
   </div>
-<div data-ng-controller="MapController as mapCtrl">
-  <div id="map"></div>
-  <!-- <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+  <div data-ng-controller="MapController as mapCtrl">
+    <div id="map"></div>
+    <!-- <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
     <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
   </div> -->
 </div>
+<script src="https://code.jquery.com/jquery.js"></script>
 <script src="./bundle.js"></script>
+<script>
+    $('img.hamburger').on('click', function() {
+      $('nav ul').toggleClass('show');
+    });
+    </script>
 </body>
 </html>
