@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.factory('crudResource', ['$http', 'fcHandleError', function($http, handleError) {
+  app.factory('CrudResource', ['$http', 'fcHandleError', function($http, handleError) {
     var Resource = function(resourceArr, errorsArr, baseUrl, options) {
       this.data = resourceArr;
       this.url = baseUrl;

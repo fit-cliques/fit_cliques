@@ -11,16 +11,18 @@ const angularProtractor = require('gulp-angular-protractor');
 const KarmaServer = require('karma').Server;
 
 var apiFiles = ['./*.js', './lib/*.js', './models/*.js', './routes/*.js'];
-var appFiles = ['./app/**/*.js', 'app/index.html'];
+var appFiles = ['./app/**/*.js'];
+var appHtml = ['app/index.html'];
 var testFiles = ['./test/*test.js'];
 var unitFiles = ['./test/unit/**/*test.js'];
 var specFiles = ['./test/integration/**/*spec.js'];
 
 var children = [];
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   gulp.watch(apiFiles, ['build:dev']);
   gulp.watch(appFiles, ['build:dev']);
+  gulp.watch(appHtml, ['build:dev']);
   gulp.watch(testFiles, ['webpack:test', 'test']);
 });
 
@@ -135,7 +137,7 @@ gulp.task('lint:api', () => {
 
 gulp.task('lint:app', () => {
   return gulp.src(appFiles)
-    .pipe(eslint('./.eslintrc.json'))
+    .pipe(eslint('./app/.eslintrc.json'))
     .pipe(eslint.format());
 });
 
@@ -147,21 +149,18 @@ gulp.task('lint:test', () => {
 
 gulp.task('lint:unit', () => {
   return gulp.src(unitFiles)
-    .pipe(eslint('./.eslintrc.json'))
+    .pipe(eslint('./test/unit/.eslintrc.json'))
     .pipe(eslint.format());
 });
 
 gulp.task('lint:spec', () => {
   return gulp.src(specFiles)
-    .pipe(eslint('./.eslintrc.json'))
+    .pipe(eslint('./test/integration/.eslintrc.json'))
     .pipe(eslint.format());
 });
 
 gulp.task('build:dev', ['webpack:dev']);
-gulp.task('test', ['test:mocha']);
-// gulp.task('test', ['test:mocha', 'test:karma'], () => {
-//   gulp.start('test:protractor');
-// });
+gulp.task('test', ['test:mocha', 'test:karma']);
 
 gulp.task('lint', ['lint:api', 'lint:app', 'lint:test', 'lint:unit', 'lint:spec']);
 
