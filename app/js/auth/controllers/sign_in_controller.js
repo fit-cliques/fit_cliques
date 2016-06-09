@@ -47,6 +47,7 @@ module.exports = function(app) {
                   fbUserAuth.getFbUserWeek(fbUserAuth.fbUserId, cb);
                 }
               ], function(err) {
+
                 if (err) console.log(err);
                 $location.path('/user');
               });
