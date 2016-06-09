@@ -1,9 +1,83 @@
+$white: white;
+$black: black;
+
 #map {
-        width: 500px;
-        height: 400px;
-      }
+  width: 500px;
+  height: 400px;
+}
 .infoWindowContent {
-        font-size:  14px !important;
-        border-top: 1px solid #ccc;
-        padding-top: 10px;
+  font-size:  14px !important;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+header {
+  position: relative;
+  img.logo {
+    float: left;
+    margin-top: 15px;
+    margin-left: 2%;
+    width: 40px;
+  }
+
+  img.hamburger {
+    @media(min-width: 768px) {
+      display: none;
+    }
+    display:block;
+    position: absolute;
+    width: 60px;
+    right: 1%;
+    top: 15%;
+
+  }
+  .menu {
+    nav ul {
+      max-height: 0;
+      width: 100%;
+
+
+      .me {
+        max-height: 20em;
+        transition: max-height 0.5s;
+        -webkit-transition: max-height 0.5s;
+        -ms-transition: max-height 0.5s;
+        -moz-transition: max-height 0.5s;
+        -o-transition: max-height 0.5s;
       }
+    }
+    li {
+      display: none;
+      @media (min-width: 768px) {
+        display: inline-block;
+        margin-left: 10%;
+        margin-top: 40px;
+      }
+      color: $white;
+    }
+  }
+}
+
+#banner-container {
+  position: relative;
+  width: 100%;
+  background-image: url("../img/stairs-man-person-walking.png");
+  background-size: contain;
+  @media(min-width:395px) {
+    background-position: 40% 60%;
+    background-size: cover;
+    height: 600px;
+  }
+  background-repeat: no-repeat;
+  height: 300px;
+  h1 {
+    position: absolute;
+    color: $white;
+    font-size: 1.5em;
+    @media(min-width:395px) {
+      font-size: 3em;
+    }
+    bottom: 35%;
+    left: 15%;
+  }
+}
