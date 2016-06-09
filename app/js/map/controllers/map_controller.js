@@ -37,6 +37,53 @@ module.exports = function(app) {
               });
             });
           });
+
+          var zipUsers = zipCodes[fbUserAuth.user.zipCode].data;
+          if (zipUsers.length > 5) zipUsers.length = 5;
+          var userNames = [];
+          var userSteps = [];
+
+          zipUsers.forEach((ele) => {
+            userNames.push(ele.username);
+            userSteps.push(ele.todaySteps);
+          });
+
+          var ctx = document.getElementById('myChart');
+
+          var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: userNames,
+              datasets: [{
+                label: '# of Steps',
+                data: userSteps,
+                backgroundColor: [
+                  '#EE9600',
+                  '#CC8B1A',
+                  '#AB8034',
+                  '#89754E',
+                  '#686B69'
+                ],
+                borderColor: [
+                  '#000000',
+                  '#09181D',
+                  '#13313B',
+                  '#1C4958',
+                  '#266276'
+                ],
+                borderWidth: 3
+              }]
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
         });
       });
   }]);
