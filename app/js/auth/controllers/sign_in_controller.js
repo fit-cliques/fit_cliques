@@ -23,7 +23,6 @@ module.exports = function(app) {
               method: 'GET',
               url: config.baseUrl + '/api/user/' + currentUser._id
             }).then((res) => {
-              console.log(res.data);
               fbUserAuth.user = res.data;
               async.series([
                 function(cb) {
