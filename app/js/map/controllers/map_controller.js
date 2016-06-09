@@ -2,7 +2,7 @@ module.exports = function(app) {
   app.controller('MapController', function() {
     var mapEle = document.getElementById('map');
     var mapOptions = {
-      zoom: 8,
+      zoom: 10,
       center: new google.maps.LatLng(47.608013, -122.335167),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
