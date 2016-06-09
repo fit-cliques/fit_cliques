@@ -161,9 +161,6 @@ gulp.task('lint:spec', () => {
 
 gulp.task('build:dev', ['webpack:dev']);
 gulp.task('test', ['test:mocha', 'test:karma']);
-// gulp.task('test', ['test:mocha', 'test:karma'], () => {
-//   gulp.start('test:protractor');
-// });
 
 gulp.task('lint', ['lint:api', 'lint:app', 'lint:test', 'lint:unit', 'lint:spec']);
 
