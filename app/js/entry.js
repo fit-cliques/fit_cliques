@@ -1,6 +1,7 @@
 const angular = require('angular');
-const fitCliqueApp = angular.module('fitCliqueApp', [require('angular-route')]);
+// const angmaps = require('angular-google-maps');
 
+const fitCliqueApp = angular.module('fitCliqueApp', [require('angular-route')]);
 require('./services')(fitCliqueApp);
 require('./user')(fitCliqueApp);
 require('./auth')(fitCliqueApp);
