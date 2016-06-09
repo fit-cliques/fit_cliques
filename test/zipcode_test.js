@@ -52,9 +52,9 @@ describe('server', () => {
         .set('token', this.token)
         .end((err, res) => {
           expect(err).to.eql(null);
-          expect(typeof res.body).to.eql('object');
-          expect(Array.isArray(res.body['98144'])).to.eql(true);
-          expect(res.body['98144'][0].username).to.eql('rick');
+          expect(typeof res.body['98144']).to.eql('object');
+          expect(Array.isArray(res.body['98144'].data)).to.eql(true);
+          expect(res.body['98144'].data[0].username).to.eql('rick');
           done();
         });
     });
