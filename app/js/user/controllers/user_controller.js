@@ -1,7 +1,7 @@
 var baseUrl = require('../../config').baseUrl;
 
 module.exports = function(app) {
-  app.controller('UserController', ['crudResource', function(Resource) {
+  app.controller('UserController', ['CrudResource', function(Resource) {
     this.user = [];
     this.errors = [];
     var crud = new Resource(this.user, this.errors, baseUrl + '/api/user',
