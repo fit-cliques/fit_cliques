@@ -9,8 +9,8 @@
 * **N** ode backend
 
 #### Register yourself on our app on heroku!
-* Visit https://fit-cliques.herokuapp.com and add yourself to the pile of users.  Your stats will be synced for your own use, as well as added to the cumulative totals for the zipcode you provide on sign in.  Do your neighborhood proud!  Walk around, you might even meet someone else trying to beef up your area's stats
-* Your data will update when you sign up, and every time you log in.  We do hourly updates of all users so you can track everyone's progress
+* Visit https://fit-cliques.herokuapp.com and add yourself to the pile of users.  Your stats will be synced for your own use, as well as added to the cumulative totals for the zipcode you provide on sign in.  Do your neighborhood proud!  Walk around, you might even meet someone else trying to beef up your area's stats.
+* Your data will update when you sign up, and every time you log in.  We do hourly updates of all users so you can track everyone's progress.
 * You can resync your account when things go sideways.  The internet isn't always 100% reliable, so there are times when the secure tokens used in Fitbit's authentication process expire or are otherwise rendered invalid.  We have you covered.  In the event that this happens, we allow you to reauthenticate your account and get back in the game.
 
 #### Getting your own app started locally
