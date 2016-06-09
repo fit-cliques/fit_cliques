@@ -40,4 +40,4 @@ app.get('/1/user/34567/activities/steps/date/today/1w.json', (req, res) => {
 });
 
 
-app.listen(8000, () => console.log('_update_server up on 8000'));
+module.exports = exports = app.listen(8000, () => console.log('_update_server up on 8000'));

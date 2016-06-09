@@ -1,14 +1,8 @@
-// create test DB DONE
-// create 1 test user DONE
-// capture fitBit API requests DONE
-//   return mock data DONE
-// check values on user objects DONE
-
 const setup = require(__dirname + '/test_setup');
 const teardown = require(__dirname + '/test_teardown');
 const chai = require('chai');
 const expect = chai.expect;
-require('./_update_server');
+const dummy = require('./_update_server');
 var User = require(__dirname + '/../models/user');
 var update = require(__dirname + '/../bin/_update_data');
 const config = require('./test_config'); // eslint-disable-line no-unused-vars
@@ -39,6 +33,7 @@ describe('update_data_test', () => {
     this.user.remove((err) => {
       if (err) console.log(err);
     });
+    dummy.close();
     teardown(done);
   });
 
@@ -46,7 +41,6 @@ describe('update_data_test', () => {
     update(config, () => {
       User.find((err, userArr) => {
         if (err) return console.log(err);
-        debugger;
         expect(userArr[0].fbToken).to.eql('12345');
         expect(userArr[0].fbRefreshToken).to.eql('23456');
         expect(userArr[0].fbUserId).to.eql('34567');
