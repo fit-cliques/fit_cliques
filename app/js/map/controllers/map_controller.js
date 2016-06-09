@@ -4,7 +4,7 @@ const async = require('async');
 module.exports = function(app) {
   app.controller('MapController', ['$http', 'fbUserAuth', function($http, fbUserAuth) {
     var mapEle = document.getElementById('map');
-
+    console.log(fbUserAuth);
 
     $http.get(config.baseUrl + '/api/zipcode')
       .then(function(res) {
@@ -13,7 +13,7 @@ module.exports = function(app) {
         var uniqueZipcodes = Object.keys(zipCodes);
 
         $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' +
-        98144 + '+usa')
+        fbUserAuth.user.zipCode + '+usa')
         .then(function(res) {
           var latlng = new google.maps.LatLng(res.data.results[0].geometry.location.lat,
             res.data.results[0].geometry.location.lng);
@@ -34,7 +34,7 @@ module.exports = function(app) {
               var marker = new google.maps.Marker({
                 position: zipLatLng,
                 map: this.map,
-                title: 'Hello World!'
+                title: ele + ' Average Steps: ' + zipCodes[ele].avgTodaySteps
               });
             });
           });

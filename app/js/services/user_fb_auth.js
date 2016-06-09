@@ -4,7 +4,6 @@ module.exports = function(app) {
   app.factory('fbUserAuth', ['$http', '$q', 'fcHandleError', function($http, $q, handleError) {
     return {
       getFbTokens: function(urlCode, cb) {
-        this.user = {};
         this.errors = [];
         this.urlCode = urlCode;
         $http({
@@ -128,7 +127,6 @@ module.exports = function(app) {
       },
 
       resyncFbTokens: function(urlCode, cb) {
-        this.user = {};
         this.errors = [];
         this.urlCode = urlCode;
         $http({

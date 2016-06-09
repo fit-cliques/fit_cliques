@@ -23,6 +23,7 @@ module.exports = function(app) {
               method: 'GET',
               url: config.baseUrl + '/api/user/' + currentUser._id
             }).then((res) => {
+              console.log(res.data);
               fbUserAuth.user = res.data;
               async.series([
                 function(cb) {
@@ -47,6 +48,7 @@ module.exports = function(app) {
                   fbUserAuth.getFbUserWeek(fbUserAuth.fbUserId, cb);
                 }
               ], function(err) {
+
                 if (err) console.log(err);
                 $location.path('/user');
               });
