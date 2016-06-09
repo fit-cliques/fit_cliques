@@ -28,7 +28,7 @@ zipcodeRouter.route('/zipcode')
 zipcodeRouter.route('/zipcode/:zipcode_id')
 
 .get((req, res) => {
-  let promise = User.find( { zipCode: req.params.zipcode_id }).exec();
+  let promise = User.find( { zipCode: req.params.zipcode_id }).sort({ todaySteps: -1 }).exec();
   promise.then((data) => {
 
     let count = 0;
