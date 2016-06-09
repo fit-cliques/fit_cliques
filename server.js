@@ -20,6 +20,10 @@ app.get('/signup', (req, res) => {
   res.redirect('/#' + req.url);
 });
 
+app.get('/resync', (req, res) => {
+  res.redirect('/#' + req.url);
+});
+
 app.use(express.static(__dirname + '/build'));
 
 module.exports = exports = app.listen(PORT, () => console.log('server up on port: ' + PORT));
