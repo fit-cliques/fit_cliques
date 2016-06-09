@@ -1,12 +1,8 @@
 const sa = require('superagent');
-const config = require('../app/js/config');
 const async = require('async');
-const mongoose = require('mongoose');
 const User = require(__dirname + '/../models/user');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fit_cliques_DB');
-
-module.exports = exports = function(cb) {
+module.exports = exports = function(config, cb) {
   User.find(null, (err, allUsers) => {
     if (err) return console.log(err);
     allUsers.forEach((ele) => {

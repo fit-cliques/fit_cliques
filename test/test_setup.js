@@ -7,7 +7,7 @@ module.exports = exports = (cb) => {
   mongoose.connect(process.env.MONGODB_URI, () => {
     server.listen(port, () => {
       console.log('server up on port: ' + port);
-      cb();
+      if (cb) cb();
     });
   });
 };

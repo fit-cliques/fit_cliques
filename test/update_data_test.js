@@ -1,21 +1,17 @@
 // create test DB DONE
 // create 1 test user DONE
-// capture fitBit API requests TODO
-//   return mock data TODO
-// check values on user objects TODO
-// check http://robdodson.me/mocking-requests-with-mocha-chai-and-sinon/
-// and http://sinonjs.org
-//         for more info on how to do this
+// capture fitBit API requests DONE
+//   return mock data DONE
+// check values on user objects DONE
+
 const setup = require(__dirname + '/test_setup');
 const teardown = require(__dirname + '/test_teardown');
 const chai = require('chai');
-const chaiHttp = require('chai-http');
 const expect = chai.expect;
-const port = process.env.PORT = 5050;
-const server = require('./_update_server');
-const config = require('./test_config');
+require('./_update_server');
 var User = require(__dirname + '/../models/user');
 var update = require(__dirname + '/../bin/_update_data');
+const config = require('./test_config'); // eslint-disable-line no-unused-vars
 
 describe('update_data_test', () => {
   before((done) => {
@@ -24,7 +20,8 @@ describe('update_data_test', () => {
       username: 'rick',
       password: 'mustache',
       encodedId: '1',
-      zipCode: '98144'
+      zipCode: '98144',
+      fbUserId: '34567'
     });
     newUser.generateHash(newUser.password);
     newUser.save((err, user) => {
@@ -46,9 +43,26 @@ describe('update_data_test', () => {
   });
 
   it('should update user data from fitBit', (done) => {
-    update(() => {
-      expect();
+    update(config, () => {
+      User.find((err, userArr) => {
+        if (err) return console.log(err);
+        debugger;
+        expect(userArr[0].fbToken).to.eql('12345');
+        expect(userArr[0].fbRefreshToken).to.eql('23456');
+        expect(userArr[0].fbUserId).to.eql('34567');
+        expect(userArr[0].todaySteps).to.eql(6789);
+        expect(userArr[0].encodedId).to.eql('Rick');
+        expect(userArr[0].memberSince.toString()).to.eql('Sun Oct 09 2016 17:00:00 GMT-0700 (PDT)');
+        expect(userArr[0].strideLength).to.eql(80);
+        expect(userArr[0].lifetimeSteps).to.eql(987654321);
+        expect(userArr[0].lifetimeDistance).to.eql(1987654321);
+        expect(userArr[0].bestSteps).to.eql('65432');
+        expect(userArr[0].bestDistance).to.eql('165432');
+        expect(userArr[0].lastSeven).to.eql([{ 'value': '11' }, { 'value': '12' },
+        { 'value': '13' }, { 'value': '14' }, { 'value': '15' }, { 'value': '16' },
+         { 'value': '17' }]);
+        done();
+      });
     });
-    done();
   });
 });
