@@ -5,7 +5,7 @@ module.exports = function(app) {
   app.controller('ResyncController', ['$http', '$location', '$routeParams', '$window',
   'fcHandleError', 'fitCliqueAuth', 'fbUserAuth',
   function($http, $location, $routeParams, $window, handleError, fitCliqueAuth, fbUserAuth) {
-    this.buttonText = 'Sign in to existing user';
+    this.buttonText = 'Resync user';
     this.errors = [];
 
     this.authenticate = function(user) {
