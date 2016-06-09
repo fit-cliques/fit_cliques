@@ -121,7 +121,35 @@ module.exports = function(app) {
           this.user.fbRefreshToken = res.data.refresh_token;
           this.user.fbUserId = res.data.user_id;
           if (cb) cb();
-        }, handleError(this.errors, 'could not get username'));
+        }, (err) => {
+          console.log(err);
+          cb(err);
+        });
+      },
+
+      resyncFbTokens: function(urlCode, cb) {
+        this.user = {};
+        this.errors = [];
+        this.urlCode = urlCode;
+        $http({
+          method: 'POST',
+          url: config.fbAuthUrl,
+          headers: {
+            'Authorization': 'Basic ' +
+              window.btoa(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET),
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: 'grant_type=authorization_code' +
+            '&clientId=' + process.env.CLIENT_ID +
+            // 'redirect_uri': 'https%3A%2F%2Ffit-cliques.herokuapp.com%2Fresync',
+            '&redirect_uri=http%3A%2F%2Flocalhost:5555%2Fresync' +
+            '&code=' + urlCode
+        }).then((res) => {
+          this.user.fbToken = res.data.access_token;
+          this.user.fbRefreshToken = res.data.refresh_token;
+          this.user.fbUserId = res.data.user_id;
+          if (cb) cb();
+        }, handleError(this.errors, 'could not get tokens'));
       }
     };
   }]);

@@ -23,6 +23,11 @@ fitCliqueApp.config(['$routeProvider', function($rp) {
     controller: 'SignUpController',
     controllerAs: 'authctrl'
   })
+  .when('/resync', {
+    templateUrl: 'templates/auth/views/sign_in_view.html',
+    controller: 'ResyncController',
+    controllerAs: 'authctrl'
+  })
   .otherwise({
     redirectTo: '/signin'
   });

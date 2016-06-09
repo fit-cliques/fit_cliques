@@ -2,10 +2,10 @@ var config = require('../../config');
 const async = require('async');
 
 module.exports = function(app) {
-  app.controller('SignInController', ['$http', '$location', '$window',
+  app.controller('ResyncController', ['$http', '$location', '$routeParams', '$window',
   'fcHandleError', 'fitCliqueAuth', 'fbUserAuth',
-  function($http, $location, $window, handleError, fitCliqueAuth, fbUserAuth) {
-    this.buttonText = 'Sign in to existing user';
+  function($http, $location, $routeParams, $window, handleError, fitCliqueAuth, fbUserAuth) {
+    this.buttonText = 'Resync user';
     this.errors = [];
 
     this.authenticate = function(user) {
@@ -26,13 +26,7 @@ module.exports = function(app) {
               fbUserAuth.user = res.data;
               async.series([
                 function(cb) {
-                  fbUserAuth.updateFbUserToken((err) => {
-                    if (err) {
-                      $window.location.href = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=http%3A%2F%2Flocalhost:5555%2Fresync&scope=activity%20profile&expires_in=604800'; // eslint-disable-line max-len
-                      // 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=https%3A%2F%2Ffit-cliques.herokuapp.com%2Fresync&scope=activity%20profile&expires_in=604800'; // eslint-disable-line max-len
-                    }
-                    cb();
-                  });
+                  fbUserAuth.resyncFbTokens($routeParams.code, cb);
                 },
                 function(cb) {
                   fbUserAuth.getFbUserSteps(fbUserAuth.fbUserId, cb);
@@ -47,7 +41,11 @@ module.exports = function(app) {
                   fbUserAuth.getFbUserWeek(fbUserAuth.fbUserId, cb);
                 }
               ], function(err) {
-                if (err) console.log(err);
+                if (err) {
+                  console.log(err);
+                  $window.location.href = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=http%3A%2F%2Flocalhost:5555%2Fresync&scope=activity%20profile&expires_in=604800'; // eslint-disable-line max-len
+                  // 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=https%3A%2F%2Ffit-cliques.herokuapp.com%2Fresync&scope=activity%20profile&expires_in=604800'; // eslint-disable-line max-len
+                }
                 $location.path('/user');
               });
             });
