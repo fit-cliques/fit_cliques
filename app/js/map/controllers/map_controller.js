@@ -4,7 +4,6 @@ const async = require('async');
 module.exports = function(app) {
   app.controller('MapController', ['$http', 'fbUserAuth', function($http, fbUserAuth) {
     var mapEle = document.getElementById('map');
-    console.log(fbUserAuth);
 
     $http.get(config.baseUrl + '/api/zipcode')
       .then(function(res) {
