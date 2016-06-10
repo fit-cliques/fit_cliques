@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fit Clique</title>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Av8ON9ivqCtz6CkLrSt_SWJvI8PAR9E"
+  async defer>
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+  <script src='angular-google-maps.min.js'></script>
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body data-ng-app="fitCliqueApp">
+  <header>
+    <nav class="menu">
+      <img class="logo" src="http://s33.postimg.org/mfg7ygg27/Drawing.png" />
+      <ul>
+        <li><a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=https%3A%2F%2Ffit-cliques.herokuapp.com%2Fsignup&scope=activity%20profile&expires_in=604800">Sign Up</a></li>
+        <li><a href="/#/signin">Sign In</a></li>
+        <li><a href="/#/user">Statistics</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="banner-container">
+    <h1>FitCliques</h1>
+  </div>
+  <div data-ng-controller="AuthController as globalAuth" data-ng-init="globalAuth.getUsername()">
+    <p data-ng-if="globalAuth.username">Hello: {{ globalAuth.username }} <a href data-ng-click="globalAuth.logout()">Logout</a>
+    </p>
+    <main data-ng-view>
+    </main>
+  </div>
+  <script src="./bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<section>
+  <h2>Zip Code Stats</h2>
+  <div id="map"></div>
+  <h3>User Stats</h3>
+  <ul id="userdata">
+    <li>Member Since: {{ mapCtrl.user.memberSince }}</li>
+    <li>Stride Length: {{ mapCtrl.user.strideLength }} inches</li>
+    <li>Today's Steps: {{ mapCtrl.user.todaySteps }}</li>
+    <li>Today's Distance: {{ mapCtrl.user.todayDistance }}</li>
+    <li>This week's steps: {{ mapCtrl.user.weekSteps }}</li>
+    <li>This week's average steps: {{ mapCtrl.user.weekAvgSteps }}</li>
+    <li>This week's distance: {{ mapCtrl.user.weekDistance }}</li>
+    <li>Lifetime Steps: {{ mapCtrl.user.lifetimeSteps }}</li>
+    <li>Lifetime average steps: {{ mapCtrl.user.lifetimeAvgSteps }}</li>
+    <li>Lifetime distance: {{ mapCtrl.user.lifetimeDistance }}</li>
+  </ul>
+  <h3>Most steps in a day</h3>
+  <ul id="beststeps">
+    <li>Date: {{ mapCtrl.user.bestSteps.date }}</li>
+    <li>Steps: {{ mapCtrl.user.bestSteps.value }}</li>
+  </ul>
+  <h3>Longest distance in a day</h3>
+  <ul id="bestdistance">
+    <li>Date: {{ mapCtrl.user.bestDistance.date }}</li>
+    <li>Distance: {{ mapCtrl.user.bestDistance.value }}</li>
+  </ul>
+  <canvas id="myChart" width="400" height="400"></canvas>
+</section>

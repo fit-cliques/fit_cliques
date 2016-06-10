@@ -1,0 +1,78 @@
+#map {
+  width: 500px;
+  height: 400px;
+  border: 3px solid $black;
+  border-radius: 15px;
+}
+.infoWindowContent {
+  font-size:  14px !important;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+header {
+  nav {
+    img.logo {
+      float: left;
+      margin-top: 15px;
+      margin-left: 2%;
+      width: 40px;
+    }
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      li {
+        display: inline-block;
+        // margin-left: 10%;
+        margin-top: 40px;
+        a {
+          color: $white;
+          text-decoration: none;
+        }
+        a:hover {
+          color: $blue;
+        }
+      }
+    }
+  }
+}
+
+#banner-container {
+  position: relative;
+  width: 100%;
+  background-image: url("../img/stairs-man-person-walking.png");
+  background-size: contain;
+  @media(min-width:395px) {
+    background-position: 30% 80%;
+    background-size: cover;
+    height: 250px;
+  }
+  background-repeat: no-repeat;
+  height: 300px;
+  h1 {
+    position: absolute;
+    color: $white;
+    font-size: 1.414em;
+    @media(min-width:395px) {
+      font-size: 3.998em;
+    }
+    bottom: 20%;
+    left: 10%;
+  }
+}
+
+h3 {
+  color: $white;
+  font-size: 1.414em;
+  margin: 2%;
+}
+
+#beststeps, #bestdistance, #userdata {
+  li {
+    font-size: 1em;
+    margin: 1%;
+    color: $white;
+  }
+}
