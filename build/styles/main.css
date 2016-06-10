@@ -1,0 +1,199 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("fonts/icomoon.eot?2ggmym");
+  src: url("fonts/icomoon.eot?2ggmym#iefix") format("embedded-opentype"), url("fonts/icomoon.ttf?2ggmym") format("truetype"), url("fonts/icomoon.woff?2ggmym") format("woff"), url("fonts/icomoon.svg?2ggmym#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-profile:before {
+  content: "\e901"; }
+
+.icon-user-plus:before {
+  content: "\e902"; }
+
+.icon-user-minus:before {
+  content: "\e903"; }
+
+.icon-stats-bars:before {
+  content: "\e905"; }
+
+.icon-menu:before {
+  content: "\e900"; }
+
+body {
+  background-color: #686B69;
+  font-family: 'Comfortaa'; }
+
+header {
+  background: black;
+  height: 70px; }
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  section h2 {
+    font-size: 1.999em;
+    color: #FFF;
+    margin: 2%; }
+  section form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    padding: 1%; }
+    section form label {
+      font-size: 1.414em;
+      font-weight: bold;
+      padding: 1%;
+      text-shadow: 0 0 5px #FFF; }
+    section form input {
+      border: 2px solid black;
+      font-size: 1em;
+      padding: 1%; }
+    section form button {
+      font-size: 1.999em;
+      margin: 2%;
+      padding: 1%;
+      background-color: #ffab00;
+      color: #686b69;
+      border: 2px solid black;
+      border-radius: 15px; }
+    section form button:hover {
+      color: #FFF; }
+  section a {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 1.414em; }
+  section a:hover {
+    color: #19BDFF; }
+
+div p {
+  font-size: 1.414em;
+  margin: 2%;
+  color: #FFF; }
+  div p a {
+    color: #ffab00;
+    text-decoration: none; }
+  div p a:hover {
+    color: #19BDFF; }
+
+#map {
+  width: 500px;
+  height: 400px;
+  border: 3px solid black;
+  border-radius: 15px; }
+
+.infoWindowContent {
+  font-size: 14px !important;
+  border-top: 1px solid #ccc;
+  padding-top: 10px; }
+
+header nav img.logo {
+  float: left;
+  margin-top: 15px;
+  margin-left: 2%;
+  width: 40px; }
+
+header nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+  header nav ul li {
+    display: inline-block;
+    margin-top: 40px; }
+    header nav ul li a {
+      color: #FFF;
+      text-decoration: none; }
+    header nav ul li a:hover {
+      color: #19BDFF; }
+
+#banner-container {
+  position: relative;
+  width: 100%;
+  background-image: url("../img/stairs-man-person-walking.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 300px; }
+  @media (min-width: 395px) {
+    #banner-container {
+      background-position: 30% 80%;
+      background-size: cover;
+      height: 250px; } }
+  #banner-container h1 {
+    position: absolute;
+    color: #FFF;
+    font-size: 1.414em;
+    bottom: 20%;
+    left: 10%; }
+    @media (min-width: 395px) {
+      #banner-container h1 {
+        font-size: 3.998em; } }
+
+h3 {
+  color: #FFF;
+  font-size: 1.414em;
+  margin: 2%; }
+
+#beststeps li, #bestdistance li, #userdata li {
+  font-size: 1em;
+  margin: 1%;
+  color: #FFF; }
+
+/*# sourceMappingURL=main.css.map */
