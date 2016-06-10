@@ -3,6 +3,7 @@ const async = require('async');
 
 module.exports = function(app) {
   app.controller('MapController', ['$http', 'fbUserAuth', function($http, fbUserAuth) {
+    this.user = fbUserAuth.user;
     var mapEle = document.getElementById('map');
 
     $http.get(config.baseUrl + '/api/zipcode')
@@ -17,7 +18,7 @@ module.exports = function(app) {
           var latlng = new google.maps.LatLng(res.data.results[0].geometry.location.lat,
             res.data.results[0].geometry.location.lng);
           var mapOptions = {
-            zoom: 8,
+            zoom: 10,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
           };

@@ -7,6 +7,8 @@
     "test": "test"
   },
   "scripts": {
+    "create-db-dir": "node lib/mkdir_db.js",
+    "install": "npm run create-db-dir",
     "test": "./node_modules/mocha/bin/mocha",
     "start": "node server.js"
   },
