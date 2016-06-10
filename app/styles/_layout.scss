@@ -2,6 +2,11 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  h2 {
+    font-size: 1.999em;
+    color: $white;
+    margin: 2%;
+  }
   form {
     display: flex;
     flex-direction: column;
