@@ -1,5 +1,4 @@
 <section>
-  <h2>Sign in to existing user</h2>
   <form name="signinform" data-ng-submit="authctrl.authenticate(authctrl.user)">
     <label for="username">Username:</label>
     <input type="text" required data-ng-model="authctrl.user.username">
@@ -9,13 +8,5 @@
 
     <button type="submit" data-ng-disabled="authform.$invalid">{{ authctrl.buttonText }}</button>
   </form>
-  <p>Not a member?<a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=https%3A%2F%2Ffit-cliques.herokuapp.com%2Fsignup&scope=activity%20profile&expires_in=604800">Sign up for an Account</a>
-  </p>
-
-  <div data-ng-controller="MapController as mapCtrl">
-    <div id="map"></div>
-    <!-- <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
-      <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
-    </div> -->
-  </div>
+  <a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=https%3A%2F%2Ffit-cliques.herokuapp.com%2Fsignup&scope=activity%20profile&expires_in=604800">Sign up for an Account</a>
 </section>

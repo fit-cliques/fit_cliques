@@ -38,7 +38,7 @@ gulp.task('startservers:test', () => {
   }));
 });
 
-gulp.task('webpack:dev', ['html:dev', 'css:dev'], () => {
+gulp.task('webpack:dev', ['html:dev', 'css:dev', 'img:dev'], () => {
   return gulp.src('app/js/entry.js')
     .pipe(webpackStream({
       devtool: 'source-map',
@@ -69,6 +69,11 @@ gulp.task('sass:dev', () => {
 gulp.task('css:dev', ['sass:dev'], () => {
   return gulp.src('app/styles/main.css')
     .pipe(gulp.dest('./build'));
+});
+
+gulp.task('img:dev', () => {
+  gulp.src('app/img/*')
+  .pipe(gulp.dest('./build/img'));
 });
 
 gulp.task('webpack:test', () => {

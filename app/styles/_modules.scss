@@ -1,9 +1,8 @@
-$white: white;
-$black: black;
-
 #map {
   width: 500px;
   height: 400px;
+  border: 3px solid $black;
+  border-radius: 15px;
 }
 .infoWindowContent {
   font-size:  14px !important;
@@ -12,48 +11,30 @@ $black: black;
 }
 
 header {
-  position: relative;
-  img.logo {
-    float: left;
-    margin-top: 15px;
-    margin-left: 2%;
-    width: 40px;
-  }
-
-  img.hamburger {
-    @media(min-width: 768px) {
-      display: none;
+  nav {
+    img.logo {
+      float: left;
+      margin-top: 15px;
+      margin-left: 2%;
+      width: 40px;
     }
-    display:block;
-    position: absolute;
-    width: 60px;
-    right: 1%;
-    top: 15%;
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
 
-  }
-  .menu {
-    nav ul {
-      max-height: 0;
-      width: 100%;
-
-
-      .me {
-        max-height: 20em;
-        transition: max-height 0.5s;
-        -webkit-transition: max-height 0.5s;
-        -ms-transition: max-height 0.5s;
-        -moz-transition: max-height 0.5s;
-        -o-transition: max-height 0.5s;
-      }
-    }
-    li {
-      display: none;
-      @media (min-width: 768px) {
+      li {
         display: inline-block;
-        margin-left: 10%;
+        // margin-left: 10%;
         margin-top: 40px;
+        a {
+          color: $white;
+          text-decoration: none;
+        }
+        a:hover {
+          color: $blue;
+        }
       }
-      color: $white;
     }
   }
 }
@@ -64,20 +45,20 @@ header {
   background-image: url("../img/stairs-man-person-walking.png");
   background-size: contain;
   @media(min-width:395px) {
-    background-position: 40% 60%;
+    background-position: 30% 80%;
     background-size: cover;
-    height: 600px;
+    height: 250px;
   }
   background-repeat: no-repeat;
   height: 300px;
   h1 {
     position: absolute;
     color: $white;
-    font-size: 1.5em;
+    font-size: 1.414em;
     @media(min-width:395px) {
-      font-size: 3em;
+      font-size: 3.998em;
     }
-    bottom: 35%;
-    left: 15%;
+    bottom: 20%;
+    left: 10%;
   }
 }
