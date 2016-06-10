@@ -46,10 +46,7 @@ module.exports = function(app) {
                 if (err) {
                   console.log(err);
                   $window.location.href = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=http%3A%2F%2Flocalhost:5555%2Fresync&scope=activity%20profile&expires_in=604800'; // eslint-disable-line max-len
-                  // 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=227THV&redirect_uri=https%3A%2F%2Ffit-cliques.herokuapp.com%2Fresync&scope=activity%20profile&expires_in=604800'; // eslint-disable-line max-len
                 }
-                console.log(fbUserAuth.user);
-                console.log(fbUserAuth.user._id);
                 $http({
                   method: 'PUT',
                   url: config.baseUrl + '/api/user/' + fbUserAuth.user._id,
