@@ -5,7 +5,7 @@ module.exports = function(app) {
   app.controller('SignInController', ['$http', '$location', '$window',
   'fcHandleError', 'fitCliqueAuth', 'fbUserAuth',
   function($http, $location, $window, handleError, fitCliqueAuth, fbUserAuth) {
-    this.buttonText = 'Sign in to existing user';
+    this.buttonText = 'Sign In';
     this.errors = [];
 
     this.authenticate = function(user) {

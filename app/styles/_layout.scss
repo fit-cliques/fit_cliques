@@ -2,19 +2,17 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  h2 {
-    margin: 2%;
-    font-size: 2.827em;
-  }
   form {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 75%;
     padding: 1%;
 
     label {
       font-size: 1.414em;
+      font-weight: bold;
       padding: 1%;
+      text-shadow: 0 0 5px $white;
     }
     input {
       border: 2px solid $black;
@@ -22,16 +20,39 @@ section {
       padding: 1%;
     }
     button {
-      font-size: 1em;
+      font-size: 1.999em;
       margin: 2%;
       padding: 1%;
       background-color: $yellow;
+      color: $grey;
+      border: 2px solid $black;
+      border-radius: 15px;
+    }
+    button:hover {
       color: $white;
-      border: 5px solid $darkgrey;
-      border-radius: 5px;
     }
   }
-  p {
+  a {
+    color: $white;
+    text-decoration: none;
+    font-size: 1.414em;
+  }
+  a:hover {
+    color: $blue;
+  }
+}
 
+div {
+  p {
+    font-size: 1.414em;
+    margin: 2%;
+    color: $white;
+    a {
+      color: $yellow;
+      text-decoration: none;
+    }
+    a:hover {
+      color: $blue;
+    }
   }
 }
