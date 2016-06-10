@@ -13,17 +13,14 @@
 </head>
 <body data-ng-app="fitCliqueApp">
   <header>
-    <div class="inner">
+    <nav class="menu">
       <img class="logo" src="http://s33.postimg.org/mfg7ygg27/Drawing.png" />
-      <img class="hamburger" src="http://s33.postimg.org/z1wvgh1lb/hamburger.png" />
-      <nav class="menu">
-        <ul>
-          <li>About</li>
-          <li>Sign Up/Sign In</li>
-          <li>Statistics</li>
-        </ul>
-      </nav>
-    </div>
+      <ul>
+        <li><a href="">Sign Up</a></li>
+        <li><a href="">Sign In</a></li>
+        <li><a href="">Statistics</a></li>
+      </ul>
+    </nav>
   </header>
   <div id="banner-container">
     <h1>FitCliques</h1>
@@ -34,12 +31,6 @@
     <main data-ng-view>
     </main>
   </div>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="./bundle.js"></script>
-<script>
-    $('img.hamburger').on('click', function() {
-      $('nav ul').toggleClass('show');
-    });
-    </script>
+  <script src="./bundle.js"></script>
 </body>
 </html>
