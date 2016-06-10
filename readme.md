@@ -13,14 +13,37 @@
 * Your data will update when you sign up, and every time you log in.  We do hourly updates of all users so you can track everyone's progress.
 * You can resync your account when things go sideways.  The internet isn't always 100% reliable, so there are times when the secure tokens used in Fitbit's authentication process expire or are otherwise rendered invalid.  We have you covered.  In the event that this happens, we allow you to reauthenticate your account and get back in the game.
 
+#### We take task automation and bundling seriously! (because it means less work for us)
+Task management handled with gulp. File bundling handled with Webpack.  See a full list of dependencies in package.json
+
+To install dependencies, after you have cloned the repository to your computer, from the command-line type:
+```bash
+>npm i
+```
+
+The, to build the production client-side files, or deploying, from your command-line, type:
+```bash
+>gulp build:dev
+```
+
+#### We take testing seriously!
+Backend unit testing is handled with Mocha and Chai.  Angular client unit testing is handled with Karma and Angular-mocks.
+
+To run our tests, from your command line, first build the production files, then type the following command to lint and run our Mocha and Karma tests:
+```bash
+>gulp
+```
+
 #### Getting your own app started locally
-Want to server your own version of Fit-Cliques?  You can probably do it!  There are a few steps you will need to take.  
+Want to serve your own version of Fit-Cliques?  You can probably do it!  There are a few steps you will need to take.
+* You will need to run a mongoDB instance on your computer.
 * You will first need to register your app with the Fitbit dev center and receive your unique CLIENT_ID and CLIENT_SECRET.  These are used to authenticate with the Fitbit API.  These should be served as environment variables to your app.
 * There are several places that you will need to insert your own information into the Fit-Cliques environment.  
   * app/config.js holds the base URL to your app.  IF you are serving locally, this will be localhost: + YOUR_PORT or something similar.  If you are serving this online, it will be the main URL of your site.
   * Fitbit requires you to leave your page and go to a page within their domain to allow users to give your app access to their account.  You will need to update the URL that you send people too, as well as the redirect_uri that fitbit will send people back too.
   * Links to the fitbit auth page can be found in the app's templates for auth views (specifically sign in and resync), as well as the angular auth controllers for sign in and resync.
   * The redirect URIs can be found in the angular user_fb_auth service, specifically the x-www-form-urlencoded data sent in the post requests to fitbit in the getFbTokens and resyncFbTokens methods.
+* If you want to implement automated data updates, you will want to add code to your server.js file that calls bin/update_data.js on a set interval. In our Heroku deployment, this is handled by Heroku Scheduler.
 * From there, it is up to you!  The Fit-Cliques API is set up to do all sorts of maths and returns a veritable cornucopia of crunched data from the users it persists.
 
 #### Fit-Cliques API
@@ -75,11 +98,6 @@ Want to server your own version of Fit-Cliques?  You can probably do it!  There 
 #### We take security seriously!
 Fitbit uses OAUTH 2.0 to handle all data transfer via their API.  These data transfers are authenticated using secure tokens with short expiration times.  The Fit-Cliques API uses an authentication process modeled after OAUTH to store these tokens.  This app also does not persist any identifying information, just the raw numbers we use for our data-crunching.  Fit-Cliques also never has access to your passwords in plain text.  All passwords are hashed and salted before they are processed by our backend.
 
-#### We take testing seriously!
-Backend unit testing is handled with Mocha and Chai.  Angular client unit testing is handled with Karma and Angular-mocks.
-
-#### We take task automation and bundling seriously! (because it means less work for us)
-Task management handled with gulp. File bundling handled with Webpack.  See a full list of dependencies in package.json
 
 #### Deployed on Heroku using the mLabs mongo database add-on and Heroku Scheduler.
 
