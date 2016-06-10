@@ -3,7 +3,6 @@ const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const sass = require('gulp-sass');
 const maps = require('gulp-sourcemaps');
-// const minifyCss = require('gulp-clean-css');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 const childProcess = require('child_process');
@@ -61,7 +60,6 @@ gulp.task('sass:dev', () => {
   gulp.src('./app/**/*.scss')
     .pipe(maps.init())
     .pipe(sass().on('error', sass.logError))
-    // .pipe(minifyCss())
     .pipe(maps.write('./'))
     .pipe(gulp.dest('./build'));
 });
