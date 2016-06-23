@@ -2,14 +2,13 @@
   "name": "fit_cliques",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "server.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "create-db-dir": "node lib/mkdir_db.js",
-    "install": "npm run create-db-dir",
-    "test": "./node_modules/mocha/bin/mocha",
+    "install": "node lib/mkdir_db.js",
+    "test": "gulp test",
     "start": "node server.js"
   },
   "repository": {
@@ -18,7 +17,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fit-cliques/fit_cliques/issues"
   },
