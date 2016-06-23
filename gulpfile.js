@@ -57,7 +57,7 @@ gulp.task('html:dev', () => {
 });
 
 gulp.task('sass:dev', () => {
-  gulp.src('./app/**/*.scss')
+  return gulp.src('./app/**/*.scss')
     .pipe(maps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(maps.write('./'))
@@ -70,27 +70,27 @@ gulp.task('css:dev', ['sass:dev'], () => {
 });
 
 gulp.task('img:dev', () => {
-  gulp.src('app/img/*')
-  .pipe(gulp.dest('./build/img'));
+  return gulp.src('app/img/*')
+    .pipe(gulp.dest('./build/img'));
 });
 
 gulp.task('webpack:test', () => {
   return gulp.src('test/unit/test_entry.js')
-  .pipe(webpackStream({
-    devtool: 'source-map',
-    output: {
-      filename: 'bundle.js'
-    },
-    module: {
-      loaders: [
-        {
-          test: /\.html$/,
-          loader: 'html'
-        }
-      ]
-    }
-  }))
-  .pipe(gulp.dest('./test'));
+    .pipe(webpackStream({
+      devtool: 'source-map',
+      output: {
+        filename: 'bundle.js'
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.html$/,
+            loader: 'html'
+          }
+        ]
+      }
+    }))
+    .pipe(gulp.dest('./test'));
 });
 
 gulp.task('test:mocha', () => {
