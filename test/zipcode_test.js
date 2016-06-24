@@ -67,7 +67,7 @@ describe('server', () => {
           expect(err).to.eql(null);
           expect(typeof res.body).to.eql('object');
           expect(res.body.zipTotalTodaySteps).to.eql(100);
-          expect(res.body.users[0].username).to.eql('rick');
+          expect(res.body.data[0].username).to.eql('rick');
           done();
         });
     });
